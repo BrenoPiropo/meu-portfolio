@@ -88,7 +88,7 @@ export const projetos: Projeto[] = [
     tagBg: "bg-blue-500/10",
     borderColor: "border-blue-500/30",
     gradientFrom: "from-blue-500/10",
-    videoUrl: "https://www.youtube.com/embed/T4RTzhH0MHw",
+    videoUrl: "https://www.youtube.com/embed/uj8AEABea3A",
     imageUrl: "/logo_minerva.jpg",
     overview: "App educacional que utiliza o algoritmo de Repetição Espaçada (SRS) para maximizar a retenção de vocabulário. Inspirado no Anki, mas com UX moderna, gamificação contextual e backend próprio para sincronização entre dispositivos.",
     problema: `Estudos mostram que 90% do vocabulário aprendido em métodos tradicionais é esquecido em 30 dias. Flashcards físicos são ineficientes e apps existentes como Anki têm UX datada, desmotivando usuários jovens. A falta de um backend próprio também impede análises de progresso detalhadas.`,

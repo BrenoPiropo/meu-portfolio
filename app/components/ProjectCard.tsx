@@ -48,8 +48,13 @@ export default function ProjectCard({
     });
   };
 
-  // Convert youtube watch URL to embed URL if needed
+  // Convert youtube watch/shorts URL to embed URL if needed
   const getEmbedUrl = (url: string) => {
+    if (url.includes('youtube.com/shorts/')) {
+      const parts = url.split('youtube.com/shorts/');
+      const videoId = parts[1].split('?')[0];
+      return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    }
     if (url.includes('youtube.com/watch?v=')) {
       const videoId = new URL(url).searchParams.get('v');
       return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
