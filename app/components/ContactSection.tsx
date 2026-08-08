@@ -1,5 +1,8 @@
+'use client';
+
+import { useState, FormEvent } from 'react';
 import AnimatedSection from './AnimatedSection';
-import { Download } from 'lucide-react';
+import { Download, Send, CheckCircle2 } from 'lucide-react';
 
 const GithubIcon = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -14,6 +17,30 @@ const LinkedinIcon = ({ size = 20 }: { size?: number }) => (
 );
 
 export default function ContactSection() {
+  const [formData, setFormData] = useState({
+    nome: '',
+    email: '',
+    assunto: '',
+    mensagem: ''
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Build mailto link as direct fallback
+    const subject = encodeURIComponent(formData.assunto || `Contato de ${formData.nome} via Portfólio`);
+    const body = encodeURIComponent(`Nome: ${formData.nome}\nEmail: ${formData.email}\n\nMensagem:\n${formData.mensagem}`);
+    
+    setTimeout(() => {
+      setLoading(false);
+      setSubmitted(true);
+      window.location.href = `mailto:brenopiropo14@gmail.com?subject=${subject}&body=${body}`;
+    }, 600);
+  };
+
   return (
     <section id="contato" className="max-w-5xl mx-auto px-6 py-32 text-center">
       <AnimatedSection>
@@ -23,20 +50,110 @@ export default function ContactSection() {
         <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-4 animate-gradient bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] bg-clip-text text-transparent">
           Vamos trabalhar juntos?
         </h2>
-        <p className="text-gray-500 text-sm max-w-md mx-auto mb-12 leading-relaxed">
-          Estou aberto a novos projetos e oportunidades. Entre em contato e vamos transformar sua ideia em produto.
+        <p className="text-gray-400 text-sm max-w-md mx-auto mb-14 leading-relaxed font-light">
+          Preencha o formulário abaixo ou entre em contato diretamente. Responderei o mais rápido possível!
         </p>
-        
-        <div className="flex flex-col items-center gap-6 mb-16">
-          <a 
-            href="mailto:brenopiropo14@gmail.com" 
-            className="group text-2xl md:text-3xl font-mono text-blue-400 hover:text-blue-300 transition-all hover:tracking-wide font-medium inline-flex items-center gap-3"
-          >
-            brenopiropo14@gmail.com
-            <svg className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <p className="text-gray-600 text-sm tracking-widest uppercase font-mono">
-            (73) 9 8864-0435 <span className="mx-3 text-gray-700">|</span> Ilhéus, Bahia
+
+        {/* Form Container */}
+        <div className="max-w-2xl mx-auto bg-[#0a0a0a] border border-white/[0.08] rounded-3xl p-8 md:p-12 text-left mb-16 shadow-2xl relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.03] via-transparent to-purple-500/[0.03] pointer-events-none" />
+
+          {submitted ? (
+            <div className="py-12 flex flex-col items-center justify-center text-center space-y-4">
+              <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                <CheckCircle2 size={32} />
+              </div>
+              <h3 className="text-2xl font-bold text-white">Mensagem Preparada!</h3>
+              <p className="text-sm text-gray-400 max-w-sm">
+                Seu leitor de e-mail foi aberto para confirmar o envio para <span className="text-blue-400 font-mono">brenopiropo14@gmail.com</span>.
+              </p>
+              <button
+                onClick={() => setSubmitted(false)}
+                className="mt-4 text-xs font-mono uppercase tracking-widest text-blue-400 hover:text-blue-300 underline underline-offset-4"
+              >
+                Enviar outra mensagem
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
+                    Seu Nome *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Ex: Carlos Silva"
+                    value={formData.nome}
+                    onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
+                    className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
+                    Seu E-mail *
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="exemplo@email.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm transition-all"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
+                  Assunto / Empresa
+                </label>
+                <input
+                  type="text"
+                  placeholder="Ex: Oportunidade de Projeto / Vaga"
+                  value={formData.assunto}
+                  onChange={(e) => setFormData({ ...formData, assunto: e.target.value })}
+                  className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm transition-all"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
+                  Sua Mensagem *
+                </label>
+                <textarea
+                  required
+                  rows={4}
+                  placeholder="Escreva sua mensagem aqui..."
+                  value={formData.mensagem}
+                  onChange={(e) => setFormData({ ...formData, mensagem: e.target.value })}
+                  className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm transition-all resize-none"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full group flex items-center justify-center gap-3 py-4 px-8 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl uppercase text-xs tracking-[0.2em] transition-all duration-300 hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] disabled:opacity-50 cursor-pointer"
+              >
+                {loading ? (
+                  <span>Enviando...</span>
+                ) : (
+                  <>
+                    <span>Enviar Mensagem</span>
+                    <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                  </>
+                )}
+              </button>
+            </form>
+          )}
+        </div>
+
+        {/* Direct Contacts & Links */}
+        <div className="flex flex-col items-center gap-4 mb-14">
+          <p className="text-gray-500 text-xs tracking-widest uppercase font-mono">
+            E-mail: <span className="text-gray-300">brenopiropo14@gmail.com</span> &nbsp;|&nbsp; Tel: <span className="text-gray-300">(73) 9 8864-0435</span> &nbsp;|&nbsp; Ilhéus, Bahia
           </p>
         </div>
 
@@ -54,7 +171,7 @@ export default function ContactSection() {
           <a
             href="/Curriculo_Breno_Piropo.pdf"
             download="Curriculo_Breno_Piropo.pdf"
-            className="group flex items-center gap-2.5 px-8 py-4 rounded-full bg-blue-600 text-white hover:bg-blue-500 hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] transition-all duration-300 hover:scale-[1.03]"
+            className="group flex items-center gap-2.5 px-8 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-[1.03]"
           >
             <Download size={18} className="group-hover:translate-y-0.5 transition-transform duration-300" />
             <span className="text-sm font-bold uppercase tracking-wider">Baixar CV</span>
