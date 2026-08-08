@@ -1,26 +1,119 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --bg: #050505;
+  --surface: #0a0a0a;
+  --surface-elevated: #111111;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --text-primary: #f5f5f5;
+  --text-secondary: #a1a1a1;
+  --text-muted: #525252;
+  --blue: #3b82f6;
+  --purple: #8b5cf6;
+  --emerald: #10b981;
+  --cyan: #06b6d4;
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
+
+code, kbd, pre, .font-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+::selection { background: rgba(59,130,246,0.3); }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(30px); filter: blur(8px) }
+  to { opacity:1; transform: translateY(0); filter: blur(0) }
+}
+@keyframes fadeIn {
+  from { opacity:0 }
+  to { opacity:1 }
+}
+@keyframes scaleIn {
+  from { opacity:0; transform: scale(0.95) }
+  to { opacity:1; transform: scale(1) }
+}
+@keyframes slideInLeft {
+  from { opacity:0; transform: translateX(-30px) }
+  to { opacity:1; transform: translateX(0) }
+}
+@keyframes slideInRight {
+  from { opacity:0; transform: translateX(30px) }
+  to { opacity:1; transform: translateX(0) }
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
+@keyframes pulseGlow {
+  0%,100% { box-shadow: 0 0 20px rgba(59,130,246,0.1) }
+  50% { box-shadow: 0 0 40px rgba(59,130,246,0.2) }
+}
+@keyframes float {
+  0%,100% { transform: translateY(0) }
+  50% { transform: translateY(-10px) }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0 }
+  100% { background-position: 200% 0 }
+}
+@keyframes borderGlow {
+  from { border-color: rgba(59,130,246,0.1) }
+  to { border-color: rgba(59,130,246,0.3) }
+}
+
+.animate-fade-up { animation: fadeUp 0.7s ease-out forwards; opacity: 0; }
+.animate-fade-in { animation: fadeIn 0.6s ease-out forwards; opacity: 0; }
+.animate-scale-in { animation: scaleIn 0.5s ease-out forwards; opacity: 0; }
+.animate-slide-left { animation: slideInLeft 0.7s ease-out forwards; opacity: 0; }
+.animate-slide-right { animation: slideInRight 0.7s ease-out forwards; opacity: 0; }
+.animate-gradient { background-size: 200% 200%; animation: gradientShift 3s ease infinite; }
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-shimmer { background-size: 200% 100%; animation: shimmer 2s linear infinite; }
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-800 { animation-delay: 800ms; }
+
+.card-glow {
+  position: relative;
+  overflow: hidden;
+}
+.card-glow::before {
+  content: '';
+  position: absolute;
+  top: var(--glow-y, 50%);
+  left: var(--glow-x, 50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 0;
+}
+.card-glow:hover::before { opacity: 1; }
