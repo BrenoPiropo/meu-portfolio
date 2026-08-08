@@ -27,6 +27,60 @@ export interface Projeto {
 
 export const projetos: Projeto[] = [
   {
+    slug: "astreu",
+    nome: "Astreu",
+    tag: "Science & IA",
+    tagColor: "text-purple-400",
+    tagBg: "bg-purple-500/10",
+    borderColor: "border-purple-500/30",
+    gradientFrom: "from-purple-500/10",
+    videoUrl: "https://www.youtube.com/embed/99UX5aCpF8Q",
+    imageUrl: "/logo_astreu.jpg",
+    overview: "Plataforma de inteligência astronômica e wiki mobile que consolida dados de missões espaciais da NASA e ESA. Integra um sistema RAG (Retrieval-Augmented Generation) para busca semântica e síntese de artigos científicos, combinado com processamento de imagens e recursos nativos do dispositivo.",
+    problema: `Dados astronômicos e publicações científicas de missões espaciais estão dispersos em portais complexos (NASA APOD, ESA Hubble, JPL), com metadados técnicos difíceis de consultar e sem busca semântica em artigos. Além disso, a visualização de imagens de alta resolução em dispositivos móveis exige pipelines otimizados e suporte a funcionamento offline.`,
+    solucao: `Desenvolvi uma solução completa que unifica APIs espaciais em uma interface imersiva. Implementei um motor de RAG (Retrieval-Augmented Generation) alimentado por artigos científicos, permitindo que os usuários façam perguntas em linguagem natural e recebam respostas precisas com citações das fontes. O app inclui persistência offline, tratamento de dados astronômicos (coordenadas RA/DEC) e recursos nativos como câmera para diário de bordo e sensores de movimento.`,
+    arquitetura: [
+      {
+        titulo: "Sistema RAG & Inteligência Artificial",
+        descricao: "Arquitetura RAG (Retrieval-Augmented Generation) integrada com vetorização de artigos científicos astronômicos. Permite busca por similaridade semântica e síntese de conhecimento em linguagem natural com citações diretas das pesquisas."
+      },
+      {
+        titulo: "Gateway de APIs Espaciais & Adapters",
+        descricao: "Camada de abstração que normaliza dados da NASA APOD, ESA Hubble Archive e JPL Small-Body Database. Converte respostas heterogêneas em schemas TypeScript unificados de alta performance."
+      },
+      {
+        titulo: "Cache Local & Persistência com SQLite",
+        descricao: "Banco SQLite local gerenciado com estratégia LRU para armazenar metadados de 500+ objetos celestes e artigos científicos, permitindo exploração completa mesmo sem conexão com a internet."
+      },
+      {
+        titulo: "Pipeline de Processamento de Imagens & Hardware Nativo",
+        descricao: "Processamento de imagens FITS e astronomia de alta resolução para JPEG/WebP progressivo. Integração com giroscópio, acelerômetro (modo Sky Map) e câmera nativa para registro de observações no diário de bordo."
+      }
+    ],
+    stack: ["React Native", "TypeScript", "Python", "RAG / Embeddings", "NASA APIs", "ESA Hubble API", "SQLite", "Expo Sensors", "Expo Camera"],
+    desafios: [
+      {
+        titulo: "Implementação e Precisão do RAG com Artigos Científicos",
+        descricao: "Garantir a relevância semântica das respostas de IA sem alucinações técnicas. Implementei chunking adaptativo dos artigos científicos, busca híbrida por vetores + palavras-chave e limiar de corte de relevância rigoroso."
+      },
+      {
+        titulo: "Rate Limiting e Cache Agressivo de APIs",
+        descricao: "Superar restrições de requisições de APIs da NASA implementando prefetch inteligente em background, compressão WebP progressiva e cache SQLite de múltiplas camadas."
+      },
+      {
+        titulo: "Processamento de Dados Astronômicos em Dispositivos Móveis",
+        descricao: "Tratamento de formatos científicos FITS e parsing de coordenadas celestes (RA/DEC) direto no cliente sem comprometer a taxa de quadros (60fps) das animações."
+      }
+    ],
+    aprendizados: [
+      "Sistemas de RAG enriquecem drasticamente a experiência do usuário ao transformar documentos técnicos estáticos em conhecimento conversacional.",
+      "A combinação de IA moderna com arquitetura offline-first cria um produto robusto e independente de instabilidades de rede.",
+      "A integração de hardware nativo (sensores e câmera) eleva um app de consulta de dados a uma ferramenta interativa completa."
+    ],
+    resultado: `O Astreu se consolidou como o projeto mais completo do portfólio, integrando RAG com artigos científicos, suporte offline a 500+ objetos celestes e precisão de ±2 graus no mapeamento de constelações. O tempo de resposta para buscas semânticas é inferior a 1.5s com consumo otimizado de memória.`,
+    githubUrl: "https://github.com/BrenoPiropo"
+  },
+  {
     slug: "clube-de-leitura",
     nome: "Clube de Leitura",
     tag: "Social",
@@ -57,7 +111,7 @@ export const projetos: Projeto[] = [
         descricao: "AsyncStorage do React Native persiste leituras localmente. Quando a conexão é restabelecida, um sync engine reconcilia diferenças entre estado local e servidor, resolvendo conflitos por timestamp."
       }
     ],
-    stack: ["React Native", "Expo", "NestJS", "TypeScript", "PostgreSQL", "Redis", "Socket.io", "OpenLibrary API"],
+    stack: ["React Native", "Expo Router", "NestJS", "TypeScript", "SQL Server", "Redis", "Socket.io", "OpenLibrary API"],
     desafios: [
       {
         titulo: "Sincronização de Estado Offline-First",
@@ -83,17 +137,21 @@ export const projetos: Projeto[] = [
   {
     slug: "minerva",
     nome: "Minerva",
-    tag: "Mobile",
+    tag: "Mobile & Backend",
     tagColor: "text-blue-400",
     tagBg: "bg-blue-500/10",
     borderColor: "border-blue-500/30",
     gradientFrom: "from-blue-500/10",
     videoUrl: "https://www.youtube.com/embed/uj8AEABea3A",
     imageUrl: "/logo_minerva.jpg",
-    overview: "App educacional que utiliza o algoritmo de Repetição Espaçada (SRS) para maximizar a retenção de vocabulário. Inspirado no Anki, mas com UX moderna, gamificação contextual e backend próprio para sincronização entre dispositivos.",
+    overview: "App educacional em produção que utiliza o algoritmo de Repetição Espaçada (SRS) para maximizar a retenção de vocabulário. Containerizado com Docker, possui backend próprio em NestJS para sincronização cross-device e análises de progresso.",
     problema: `Estudos mostram que 90% do vocabulário aprendido em métodos tradicionais é esquecido em 30 dias. Flashcards físicos são ineficientes e apps existentes como Anki têm UX datada, desmotivando usuários jovens. A falta de um backend próprio também impede análises de progresso detalhadas.`,
-    solucao: `Desenvolvi um sistema SRS completo com algoritmo SM-2 otimizado, interface de flashcards fluida com gestos (swipe left/right/up), e um backend que analisa padrões de erro para identificar palavras de maior dificuldade. A gamificação inclui streaks diários, decks temáticos e competições semanais.`,
+    solucao: `Desenvolvi um sistema SRS completo com algoritmo SM-2 otimizado, interface de flashcards fluida com gestos (swipe left/right/up), e um backend em NestJS containerizado com Docker que analisa padrões de erro para identificar palavras de maior dificuldade. A gamificação inclui streaks diários, decks temáticos e competições semanais.`,
     arquitetura: [
+      {
+        titulo: "Implantado em Produção com Docker",
+        descricao: "Arquitetura backend containerizada com Docker, garantindo ambientes consistentes entre desenvolvimento, staging e produção com integração contínua."
+      },
       {
         titulo: "Algoritmo SM-2 Otimizado",
         descricao: "Implementação própria do algoritmo SuperMemo-2 com ajustes dinâmicos de intervalo baseados em taxa de acerto histórica. Palavras com erro recorrente têm intervalo reduzido automaticamente."
@@ -105,13 +163,9 @@ export const projetos: Projeto[] = [
       {
         titulo: "Sincronização Cross-Device",
         descricao: "API RESTful que sincroniza estado de revisão entre múltiplos dispositivos. O usuário pode revisar no celular pela manhã e no tablet à noite sem perder progresso."
-      },
-      {
-        titulo: "Notificações Contextuais",
-        descricao: "Sistema de notificações push local com horários otimizados pelo histórico de uso. Se o usuário sempre revisa às 19h, a notificação é agendada para 18:45."
       }
     ],
-    stack: ["React Native", "NestJS", "TypeScript", "PostgreSQL", "SM-2 Algorithm", "Expo Notifications", "Reanimated"],
+    stack: ["React Native", "NestJS", "Docker", "TypeScript", "PostgreSQL", "SM-2 Algorithm", "Expo Notifications", "Reanimated"],
     desafios: [
       {
         titulo: "Implementação do Algoritmo SM-2",
@@ -132,60 +186,6 @@ export const projetos: Projeto[] = [
       "Notificações push são uma faca de dois gumes: agendadas corretamente aumentam retenção em 40%; genéricas causam uninstall."
     ],
     resultado: `Usuários beta reportaram aumento de 3x na retenção de vocabulário comparado a métodos tradicionais. A taxa de conclusão diária de sessões atingiu 82%, e o streak médio é de 23 dias — indicando hábito real formado.`,
-    githubUrl: "https://github.com/BrenoPiropo"
-  },
-  {
-    slug: "astreu",
-    nome: "Astreu",
-    tag: "Science",
-    tagColor: "text-purple-400",
-    tagBg: "bg-purple-500/10",
-    borderColor: "border-purple-500/30",
-    gradientFrom: "from-purple-500/10",
-    videoUrl: "https://www.youtube.com/embed/99UX5aCpF8Q",
-    imageUrl: "/logo_astreu.jpg",
-    overview: "Wiki astronômica mobile que consolida dados de missões espaciais da NASA e ESA em uma interface imersiva. O app combina tratamento de dados científicos em formatos especializados com recursos nativos do dispositivo para uma experiência de exploração única.",
-    problema: `Dados astronômicos de missões espaciais estão dispersos entre dezenas de portais (NASA APOD, ESA Hubble, JPL, etc.), cada um com interfaces diferentes e formatos incompatíveis. O público geral não consegue acessar imagens de alta resolução ou entender metadados técnicos. Apps existentes são pesados e não funcionam offline.`,
-    solucao: `Unifiquei múltiplas APIs espaciais em uma única interface coesa. O app traduz metadados técnicos (coordenadas celestes, filtros espectrais, instrumentos) em linguagem acessível. Persistência local permite explorar o universo mesmo sem internet, e recursos nativos como câmera e sensores de movimento criam experiências imersivas (ex: apontar o celular para o céu e identificar constelações).`,
-    arquitetura: [
-      {
-        titulo: "Gateway de APIs Espaciais",
-        descricao: "Camada de abstração que normaliza dados da NASA APOD, ESA Hubble Archive e JPL Small-Body Database. Cada API tem seu próprio adapter que converte responses em um schema unificado."
-      },
-      {
-        titulo: "Cache Local com SQLite",
-        descricao: "Banco SQLite local armazena imagens em cache (comprimidas) e metadados astronômicos. O usuário pode navegar por 500+ objetos celestes offline. Sistema de LRU (Least Recently Used) gerencia espaço automaticamente."
-      },
-      {
-        titulo: "Processamento de Imagens",
-        descricao: "Pipeline de processamento que converte imagens FITS (formato astronômico padrão) para JPEG otimizado para mobile. Inclui ajuste de histograma, redução de ruído e compressão progressiva."
-      },
-      {
-        titulo: "Integração com Hardware Nativo",
-        descricao: "Giroscópio e acelerômetro para modo 'Sky Map': aponte o celular para o céu e veja constelações sobrepostas via AR. Câmera para capturar fotos do céu noturno e comparar com imagens de telescópios profissionais."
-      }
-    ],
-    stack: ["React Native", "NASA APOD API", "ESA Hubble API", "SQLite", "TypeScript", "Expo Sensors", "Expo Camera", "Sharp (image processing)"],
-    desafios: [
-      {
-        titulo: "Rate Limiting das APIs",
-        descricao: "A NASA APOD limita a 1000 requests/dia. Implementei um sistema de cache agressivo com prefetch inteligente: o app baixa dados dos próximos 7 dias em background, e imagens são carregadas em resolução progressiva (thumbnail → HD)."
-      },
-      {
-        titulo: "Tratamento de Dados Astronômicos",
-        descricao: "Dados da ESA vêm em formato FITS com headers complexos (WCS coordinates, filtros espectrais). Desenvolvi um parser que extrai coordenadas celestes (RA/DEC), data de observação e instrumento utilizado, apresentando tudo de forma acessível."
-      },
-      {
-        titulo: "Performance de Imagens de Alta Resolução",
-        descricao: "Imagens do Hubble chegam a 50MB+. Implementei carregamento progressivo: thumbnail borrado instantâneo (200ms), preview em resolução média (2s), e download completo sob demanda. O cache local usa WebP com qualidade 85 para reduzir tamanho em 60%."
-      }
-    ],
-    aprendizados: [
-      "Dados científicos precisam de 'camadas de abstração': o usuário não precisa entender RA/DEC, mas o app precisa saber para calcular posições.",
-      "Prefetch agressivo é essencial quando você depende de APIs de terceiros com limitações.",
-      "Recursos nativos do dispositivo (sensores, câmera) transformam um app de consumo de conteúdo em uma experiência de descoberta."
-    ],
-    resultado: `O app cataloga 500+ objetos celestes com dados oficiais da NASA/ESA. O modo Sky Map identifica corretamente 88 constelações com precisão de ±2 graus. O cache local permite navegação completa offline, e o tempo médio de carregamento de imagens caiu de 8s para 1.2s com o pipeline de processamento.`,
     githubUrl: "https://github.com/BrenoPiropo"
   }
 ];

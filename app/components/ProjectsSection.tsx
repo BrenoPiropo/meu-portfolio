@@ -10,7 +10,7 @@ export default function ProjectsSection() {
       case 'minerva':
         return { tag: 'Mobile', tagColor: 'text-blue-400', accentColor: '#3b82f6', hashtags: ['#MOBILE', '#FULLSTACK'] };
       case 'astreu':
-        return { tag: 'Science', tagColor: 'text-purple-400', accentColor: '#8b5cf6', hashtags: ['#NASA_API', '#STORAGE'] };
+        return { tag: 'Science & IA', tagColor: 'text-purple-400', accentColor: '#8b5cf6', hashtags: ['#IA_RAG', '#NASA_API', '#STORAGE'] };
       default:
         return { tag: 'Projeto', tagColor: 'text-white', accentColor: '#ffffff', hashtags: [] };
     }
