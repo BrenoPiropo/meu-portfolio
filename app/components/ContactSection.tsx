@@ -153,7 +153,7 @@ export default function ContactSection() {
         {/* Direct Contacts & Links */}
         <div className="flex flex-col items-center gap-4 mb-14">
           <p className="text-gray-500 text-xs tracking-widest uppercase font-mono">
-            E-mail: <span className="text-gray-300">brenopiropo14@gmail.com</span> &nbsp;|&nbsp; Tel: <span className="text-gray-300">(73) 9 8864-0435</span> &nbsp;|&nbsp; Ilhéus, Bahia
+            E-mail: <span className="text-gray-300">brenopiropo14@gmail.com</span>
           </p>
         </div>
 
