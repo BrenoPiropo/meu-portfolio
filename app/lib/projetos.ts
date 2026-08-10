@@ -23,6 +23,13 @@ export interface Projeto {
   aprendizados: string[];
   resultado: string;
   githubUrl?: string;
+  githubBackendUrl?: string;
+  documentationUrl?: string;
+  documentationCompleteUrl?: string;
+  featured?: boolean;
+  role: string;
+  status: string;
+  highlights: string[];
 }
 
 export const projetos: Projeto[] = [
@@ -36,49 +43,55 @@ export const projetos: Projeto[] = [
     gradientFrom: "from-purple-500/10",
     videoUrl: "https://www.youtube.com/embed/99UX5aCpF8Q",
     imageUrl: "/logo_astreu.jpg",
-    overview: "Plataforma de inteligência astronômica e wiki mobile que consolida dados de missões espaciais da NASA e ESA. Integra um sistema RAG (Retrieval-Augmented Generation) para busca semântica e síntese de artigos científicos, combinado com processamento de imagens e recursos nativos do dispositivo.",
-    problema: `Dados astronômicos e publicações científicas de missões espaciais estão dispersos em portais complexos (NASA APOD, ESA Hubble, JPL), com metadados técnicos difíceis de consultar e sem busca semântica em artigos. Além disso, a visualização de imagens de alta resolução em dispositivos móveis exige pipelines otimizados e suporte a funcionamento offline.`,
-    solucao: `Desenvolvi uma solução completa que unifica APIs espaciais em uma interface imersiva. Implementei um motor de RAG (Retrieval-Augmented Generation) alimentado por artigos científicos, permitindo que os usuários façam perguntas em linguagem natural e recebam respostas precisas com citações das fontes. O app inclui persistência offline, tratamento de dados astronômicos (coordenadas RA/DEC) e recursos nativos como câmera para diário de bordo e sensores de movimento.`,
+    overview: "Plataforma mobile de exploração astronômica desenvolvida como TCC. Reúne dados científicos, comunidade e um assistente RAG que consulta artigos reais antes de responder.",
+    problema: `Dados astronômicos confiáveis estão distribuídos entre diferentes fontes científicas e costumam exigir interfaces especializadas. Ao mesmo tempo, assistentes generalistas podem responder sem fundamentação e dificultar a conferência das informações.`,
+    solucao: `Desenvolvi uma experiência mobile que integra NASA APOD, NASA NeoWs, Caltech Exoplanet Archive, ESA Gaia DR3 e arXiv. O backend em NestJS organiza usuários, comunidade e diário de bordo, enquanto o pipeline RAG usa Ollama, Llama 3, mxbai-embed-large e ChromaDB para recuperar trechos científicos antes de gerar respostas com referências.`,
     arquitetura: [
       {
         titulo: "Sistema RAG & Inteligência Artificial",
-        descricao: "Arquitetura RAG (Retrieval-Augmented Generation) integrada com vetorização de artigos científicos astronômicos. Permite busca por similaridade semântica e síntese de conhecimento em linguagem natural com citações diretas das pesquisas."
+        descricao: "PDFs do arXiv são divididos em blocos, vetorizados com mxbai-embed-large e armazenados no ChromaDB. Os quatro trechos mais similares são enviados ao Llama 3 como contexto."
       },
       {
         titulo: "Gateway de APIs Espaciais & Adapters",
-        descricao: "Camada de abstração que normaliza dados da NASA APOD, ESA Hubble Archive e JPL Small-Body Database. Converte respostas heterogêneas em schemas TypeScript unificados de alta performance."
+        descricao: "Integrações com NASA APOD, NASA NeoWs, Caltech Exoplanet Archive, ESA Gaia DR3 e arXiv abastecem as áreas de exploração científica do aplicativo."
       },
       {
-        titulo: "Cache Local & Persistência com SQLite",
-        descricao: "Banco SQLite local gerenciado com estratégia LRU para armazenar metadados de 500+ objetos celestes e artigos científicos, permitindo exploração completa mesmo sem conexão com a internet."
+        titulo: "Backend modular e persistência",
+        descricao: "API NestJS com TypeORM e MySQL, organizada em módulos para usuários, autenticação, comunidade, diário de bordo, metas, galeria e inteligência artificial."
       },
       {
-        titulo: "Pipeline de Processamento de Imagens & Hardware Nativo",
-        descricao: "Processamento de imagens FITS e astronomia de alta resolução para JPEG/WebP progressivo. Integração com giroscópio, acelerômetro (modo Sky Map) e câmera nativa para registro de observações no diário de bordo."
+        titulo: "Experiência mobile e comunidade",
+        descricao: "Frontend em React Native e Expo com catálogo científico, galeria, feed social, upload de PDFs, diário de bordo com fotos e metas de exploração."
       }
     ],
-    stack: ["React Native", "TypeScript", "Python", "RAG / Embeddings", "NASA APIs", "ESA Hubble API", "SQLite", "Expo Sensors", "Expo Camera"],
+    stack: ["React Native", "Expo", "TypeScript", "NestJS", "TypeORM", "MySQL", "LangChain", "Ollama / Llama 3", "ChromaDB", "NASA APIs"],
     desafios: [
       {
         titulo: "Implementação e Precisão do RAG com Artigos Científicos",
-        descricao: "Garantir a relevância semântica das respostas de IA sem alucinações técnicas. Implementei chunking adaptativo dos artigos científicos, busca híbrida por vetores + palavras-chave e limiar de corte de relevância rigoroso."
+        descricao: "Estruturar ingestão, chunking, embeddings e recuperação de contexto para fazer o modelo responder a partir dos artigos científicos disponíveis. A avaliação formal do RAG permanece como evolução planejada."
       },
       {
-        titulo: "Rate Limiting e Cache Agressivo de APIs",
-        descricao: "Superar restrições de requisições de APIs da NASA implementando prefetch inteligente em background, compressão WebP progressiva e cache SQLite de múltiplas camadas."
+        titulo: "Integração de fontes heterogêneas",
+        descricao: "Normalizar respostas de diferentes serviços científicos e apresentá-las em uma navegação consistente, mantendo tratamento de erros por integração."
       },
       {
-        titulo: "Processamento de Dados Astronômicos em Dispositivos Móveis",
-        descricao: "Tratamento de formatos científicos FITS e parsing de coordenadas celestes (RA/DEC) direto no cliente sem comprometer a taxa de quadros (60fps) das animações."
+        titulo: "Segurança e evolução da autenticação",
+        descricao: "A versão documentada ainda não utiliza JWT. A adoção de tokens de sessão, remoção de credenciais hardcoded e proteção dos endpoints está registrada como prioridade técnica."
       }
     ],
     aprendizados: [
       "Sistemas de RAG enriquecem drasticamente a experiência do usuário ao transformar documentos técnicos estáticos em conhecimento conversacional.",
-      "A combinação de IA moderna com arquitetura offline-first cria um produto robusto e independente de instabilidades de rede.",
-      "A integração de hardware nativo (sensores e câmera) eleva um app de consulta de dados a uma ferramenta interativa completa."
+      "A integração de fontes científicas exige adapters claros e tratamento independente de falhas.",
+      "Documentar limitações de segurança e avaliação torna o estudo de caso mais transparente e útil."
     ],
-    resultado: `O Astreu se consolidou como o projeto mais completo do portfólio, integrando RAG com artigos científicos, suporte offline a 500+ objetos celestes e precisão de ±2 graus no mapeamento de constelações. O tempo de resposta para buscas semânticas é inferior a 1.5s com consumo otimizado de memória.`,
-    githubUrl: "https://github.com/BrenoPiropo"
+    resultado: `O projeto entrega um protótipo full stack documentado com nove áreas principais, integrações científicas reais, comunidade e um pipeline RAG executado localmente. As próximas etapas registradas incluem avaliação formal do RAG e fortalecimento da autenticação.`,
+    githubUrl: "https://github.com/BrenoPiropo",
+    documentationUrl: "/Documentacao_Resumida_Astreu_Hub.html",
+    documentationCompleteUrl: "/Documentacao_Completa_Astreu_Hub.html",
+    featured: true,
+    role: "Desenvolvimento full stack individual e pesquisa aplicada no TCC",
+    status: "Protótipo acadêmico documentado",
+    highlights: ["RAG com artigos científicos", "5 fontes de dados", "9 áreas principais"]
   },
   {
     slug: "clube-de-leitura",
@@ -131,8 +144,11 @@ export const projetos: Projeto[] = [
       "Gamificação efetiva precisa de feedback imediato. Delay entre ação e recompensa maior que 2s quebra o loop de engajamento.",
       "TypeScript em todo o stack (frontend + backend) eliminou uma classe inteira de bugs de integração."
     ],
-    resultado: `O app atingiu 200+ usuários beta em 3 meses, com taxa de retenção de 68% na primeira semana — acima da média da categoria (35%). O sistema de clubes gerou 450+ discussões ativas, provando que a dimensão social é o diferencial competitivo.`,
-    githubUrl: "https://github.com/BrenoPiropo"
+    resultado: `O projeto demonstra a construção de uma experiência social de leitura com clubes temáticos, metas, rankings, atualização em tempo real e integração com um catálogo externo de livros.`,
+    githubUrl: "https://github.com/BrenoPiropo",
+    role: "Desenvolvimento full stack individual",
+    status: "Projeto independente",
+    highlights: ["Clubes temáticos", "Gamificação", "Integração OpenLibrary"]
   },
   {
     slug: "minerva",
@@ -144,49 +160,55 @@ export const projetos: Projeto[] = [
     gradientFrom: "from-blue-500/10",
     videoUrl: "https://www.youtube.com/embed/uj8AEABea3A",
     imageUrl: "/logo_minerva.jpg",
-    overview: "App educacional em produção que utiliza o algoritmo de Repetição Espaçada (SRS) para maximizar a retenção de vocabulário. Containerizado com Docker, possui backend próprio em NestJS para sincronização cross-device e análises de progresso.",
-    problema: `Estudos mostram que 90% do vocabulário aprendido em métodos tradicionais é esquecido em 30 dias. Flashcards físicos são ineficientes e apps existentes como Anki têm UX datada, desmotivando usuários jovens. A falta de um backend próprio também impede análises de progresso detalhadas.`,
-    solucao: `Desenvolvi um sistema SRS completo com algoritmo SM-2 otimizado, interface de flashcards fluida com gestos (swipe left/right/up), e um backend em NestJS containerizado com Docker que analisa padrões de erro para identificar palavras de maior dificuldade. A gamificação inclui streaks diários, decks temáticos e competições semanais.`,
+    overview: "Aplicativo mobile gamificado para aprender vocabulário em inglês com flash cards, revisão espaçada, jogos, tutor de IA, ranking e desafios diários.",
+    problema: `Praticar vocabulário de forma consistente exige variedade, feedback rápido e um histórico de progresso. Experiências restritas a listas ou flash cards isolados podem perder engajamento e não priorizar palavras que precisam de revisão.`,
+    solucao: `Desenvolvi um aplicativo em React Native e Expo com estudo por flash cards, revisão de erros, jogos de palavras, tutor com Google Gemini e um sistema de XP, níveis, ofensiva, conquistas, ranking e desafios diários. O backend NestJS usa JWT, TypeORM e MySQL, com deploy containerizado no Render.`,
     arquitetura: [
       {
         titulo: "Implantado em Produção com Docker",
         descricao: "Arquitetura backend containerizada com Docker, garantindo ambientes consistentes entre desenvolvimento, staging e produção com integração contínua."
       },
       {
-        titulo: "Algoritmo SM-2 Otimizado",
-        descricao: "Implementação própria do algoritmo SuperMemo-2 com ajustes dinâmicos de intervalo baseados em taxa de acerto histórica. Palavras com erro recorrente têm intervalo reduzido automaticamente."
+        titulo: "Revisão espaçada",
+        descricao: "O backend registra acertos e erros e disponibiliza as palavras pendentes para revisão, criando um ciclo de prática focado nas dificuldades do usuário."
       },
       {
-        titulo: "Sessões de Revisão Inteligentes",
-        descricao: "O backend calcula diariamente o 'deck de revisão' ótimo para cada usuário, considerando palavras vencidas, novas palavras do dia e palavras de dificuldade elevada. Limite de 20 novas palavras/dia para evitar sobrecarga cognitiva."
+        titulo: "Gamificação integrada",
+        descricao: "XP, níveis, ofensiva, três desafios diários, conquistas e ranking global conectam estudo, jogos e progressão em uma única experiência."
       },
       {
-        titulo: "Sincronização Cross-Device",
-        descricao: "API RESTful que sincroniza estado de revisão entre múltiplos dispositivos. O usuário pode revisar no celular pela manhã e no tablet à noite sem perder progresso."
+        titulo: "Autenticação e API",
+        descricao: "API NestJS protegida com JWT, Passport, bcrypt, Helmet e limitação de requisições. O gateway de IA mantém a integração com Gemini no backend."
       }
     ],
-    stack: ["React Native", "NestJS", "Docker", "TypeScript", "PostgreSQL", "SM-2 Algorithm", "Expo Notifications", "Reanimated"],
+    stack: ["React Native", "Expo Router", "TypeScript", "NestJS", "TypeORM", "MySQL", "JWT", "Google Gemini", "Docker", "Render"],
     desafios: [
       {
-        titulo: "Implementação do Algoritmo SM-2",
-        descricao: "O algoritmo original SuperMemo-2 tem nuances matemáticas sutis. Tive que estudar papers acadêmicos sobre spaced repetition e fazer ajustes para lidar com edge cases: usuários que param por semanas, palavras novas vs. revisão, e o efeito de 'ease hell'."
+        titulo: "Unificar estudo e jogos",
+        descricao: "Manter XP, progresso, desafios e revisão coerentes entre flash cards, forca, enigmas e palavras embaralhadas exigiu centralizar regras no backend."
       },
       {
-        titulo: "UX de Flashcards Fluida",
-        descricao: "Criar gestos naturais (swipe) com animações de 60fps usando Reanimated. Cada direção de swipe tem feedback visual e háptico diferente: direita (acerto) vibra suave, esquerda (erro) vibra mais forte, cima (muito fácil) tem animação de celebração."
+        titulo: "Autenticação persistente",
+        descricao: "O aplicativo restaura sessões a partir do JWT salvo no dispositivo e limpa o estado ao receber respostas 401, evitando fluxos inconsistentes de login."
       },
       {
-        titulo: "Persistência Local vs. Cloud",
-        descricao: "Decidir o que fica local e o que vai para a cloud foi crucial. O estado de revisão (intervalos, datas) é sincronizado, mas os assets de áudio das pronúncias ficam em cache local para funcionamento offline."
+        titulo: "Integração segura com IA",
+        descricao: "A chamada ao Gemini passa por um gateway no backend, evitando expor a chave da API no aplicativo mobile e permitindo controle centralizado das requisições."
       }
     ],
     aprendizados: [
-      "Algoritmos de aprendizado precisam de 'humanização': um intervalo matematicamente ótimo pode ser psicologicamente desmotivador.",
-      "Animações não são decoração — em apps de flashcards, elas reforçam o feedback de acerto/erro e melhoram a retenção.",
-      "Notificações push são uma faca de dois gumes: agendadas corretamente aumentam retenção em 40%; genéricas causam uninstall."
+      "Mecânicas de gamificação funcionam melhor quando compartilham uma regra de progresso simples e previsível.",
+      "A autenticação mobile precisa tratar restauração, expiração e logout como partes do mesmo fluxo.",
+      "Serviços de IA devem ser acessados pelo backend para proteger credenciais e permitir observabilidade."
     ],
-    resultado: `Usuários beta reportaram aumento de 3x na retenção de vocabulário comparado a métodos tradicionais. A taxa de conclusão diária de sessões atingiu 82%, e o streak médio é de 23 dias — indicando hábito real formado.`,
-    githubUrl: "https://github.com/BrenoPiropo"
+    resultado: `A versão documentada reúne doze telas, autenticação JWT, revisão de palavras, quatro modalidades de jogo/estudo, tutor de IA, desafios e ranking. O backend está publicado no Render e o aplicativo possui configuração para builds Android via EAS.`,
+    githubUrl: "https://github.com/BrenoPiropo/Readingapp",
+    githubBackendUrl: "https://github.com/BrenoPiropo/Minerva-backend",
+    documentationUrl: "/documentacao_resumida_minerva.html",
+    documentationCompleteUrl: "/documentacao_completa_minerva.html",
+    role: "Desenvolvimento full stack individual",
+    status: "Backend publicado no Render",
+    highlights: ["12 telas", "JWT + segurança", "IA via Gemini"]
   }
 ];
 

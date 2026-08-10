@@ -51,7 +51,7 @@ export default function ContactSection() {
           Vamos trabalhar juntos?
         </h2>
         <p className="text-gray-400 text-sm max-w-md mx-auto mb-14 leading-relaxed font-light">
-          Preencha o formulário abaixo ou entre em contato diretamente. Responderei o mais rápido possível!
+          Conte um pouco sobre a oportunidade. O formulário prepara a mensagem no seu aplicativo de e-mail para você revisar antes do envio.
         </p>
 
         {/* Form Container */}
@@ -78,11 +78,14 @@ export default function ContactSection() {
             <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
+                  <label htmlFor="contact-name" className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
                     Seu Nome *
                   </label>
                   <input
+                    id="contact-name"
+                    name="name"
                     type="text"
+                    autoComplete="name"
                     required
                     placeholder="Ex: Carlos Silva"
                     value={formData.nome}
@@ -91,11 +94,14 @@ export default function ContactSection() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
+                  <label htmlFor="contact-email" className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
                     Seu E-mail *
                   </label>
                   <input
+                    id="contact-email"
+                    name="email"
                     type="email"
+                    autoComplete="email"
                     required
                     placeholder="exemplo@email.com"
                     value={formData.email}
@@ -106,10 +112,12 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
+                <label htmlFor="contact-subject" className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
                   Assunto / Empresa
                 </label>
                 <input
+                  id="contact-subject"
+                  name="subject"
                   type="text"
                   placeholder="Ex: Oportunidade de Projeto / Vaga"
                   value={formData.assunto}
@@ -119,10 +127,12 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
+                <label htmlFor="contact-message" className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
                   Sua Mensagem *
                 </label>
                 <textarea
+                  id="contact-message"
+                  name="message"
                   required
                   rows={4}
                   placeholder="Escreva sua mensagem aqui..."
@@ -141,7 +151,7 @@ export default function ContactSection() {
                   <span>Enviando...</span>
                 ) : (
                   <>
-                    <span>Enviar Mensagem</span>
+                    <span>Preparar E-mail</span>
                     <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
                   </>
                 )}
@@ -153,7 +163,10 @@ export default function ContactSection() {
         {/* Direct Contacts & Links */}
         <div className="flex flex-col items-center gap-4 mb-14">
           <p className="text-gray-500 text-xs tracking-widest uppercase font-mono">
-            E-mail: <span className="text-gray-300">brenopiropo14@gmail.com</span>
+            E-mail:{' '}
+            <a href="mailto:brenopiropo14@gmail.com" className="text-gray-300 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white">
+              brenopiropo14@gmail.com
+            </a>
           </p>
         </div>
 

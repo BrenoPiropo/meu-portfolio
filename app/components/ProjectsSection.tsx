@@ -1,56 +1,62 @@
+'use client';
+
+import { useRef, useState } from 'react';
 import AnimatedSection from './AnimatedSection';
 import ProjectCard from './ProjectCard';
+import ProjectsPagination from './ProjectsPagination';
 import { projetos } from '@/app/lib/projetos';
 
+const PROJECTS_PER_PAGE = 4;
+
 export default function ProjectsSection() {
-  const getProjectConfig = (slug: string) => {
-    switch(slug) {
-      case 'clube-de-leitura':
-        return { tag: 'Social', tagColor: 'text-emerald-400', accentColor: '#10b981', hashtags: ['#SOCIAL', '#GAMIFICATION'] };
-      case 'minerva':
-        return { tag: 'Mobile', tagColor: 'text-blue-400', accentColor: '#3b82f6', hashtags: ['#MOBILE', '#FULLSTACK'] };
-      case 'astreu':
-        return { tag: 'Science & IA', tagColor: 'text-purple-400', accentColor: '#8b5cf6', hashtags: ['#IA_RAG', '#NASA_API', '#STORAGE'] };
-      default:
-        return { tag: 'Projeto', tagColor: 'text-white', accentColor: '#ffffff', hashtags: [] };
-    }
+  const [currentPage, setCurrentPage] = useState(1);
+  const sectionRef = useRef<HTMLElement>(null);
+  const totalPages = Math.ceil(projetos.length / PROJECTS_PER_PAGE);
+  const startIndex = (currentPage - 1) * PROJECTS_PER_PAGE;
+  const visibleProjects = projetos.slice(startIndex, startIndex + PROJECTS_PER_PAGE);
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages || page === currentPage) return;
+
+    setCurrentPage(page);
+    window.setTimeout(() => {
+      sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 40);
   };
 
   return (
-    <section id="projetos" className="max-w-6xl mx-auto px-6 py-32">
-      <AnimatedSection className="mb-16">
-        <span className="text-[10px] font-mono text-emerald-500 uppercase tracking-[0.3em] mb-4 block">
-          Portfólio
-        </span>
-        <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight">
-          Projetos em Destaque
-        </h2>
-      </AnimatedSection>
+    <section ref={sectionRef} id="projetos" className="scroll-mt-20 px-6 py-24 sm:py-32">
+      <div className="mx-auto max-w-6xl">
+        <AnimatedSection className="mb-12 sm:mb-16">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <span className="mb-4 block text-[10px] font-mono uppercase tracking-[0.3em] text-emerald-400">
+                Portfólio
+              </span>
+              <h2 className="text-3xl font-black uppercase tracking-[-0.04em] sm:text-5xl">
+                Projetos em destaque
+              </h2>
+            </div>
+            <p className="max-w-md text-sm leading-7 text-white/45 sm:text-right">
+              Produtos mobile e experiências full stack apresentados com contexto, decisões técnicas e aprendizados reais.
+            </p>
+          </div>
+        </AnimatedSection>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {projetos.slice(0, 3).map((projeto, index) => {
-          const config = getProjectConfig(projeto.slug);
-          return (
-            <AnimatedSection 
-              key={projeto.slug} 
-              delay={index * 150} 
-              className={index === 0 ? 'lg:col-span-2' : ''}
-            >
-              <ProjectCard 
-                name={projeto.nome}
-                tag={config.tag}
-                tagColor={config.tagColor}
-                description={projeto.overview}
-                videoUrl={projeto.videoUrl}
-                imageUrl={projeto.imageUrl}
-                slug={projeto.slug}
-                accentColor={config.accentColor}
-                hashtags={config.hashtags}
-                index={index}
-              />
-            </AnimatedSection>
-          );
-        })}
+        <div
+          key={currentPage}
+          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8 motion-safe:animate-[fadeUp_450ms_ease-out_both]"
+        >
+          {visibleProjects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
+        </div>
+
+        <ProjectsPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
     </section>
   );

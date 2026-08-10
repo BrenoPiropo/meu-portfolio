@@ -1,138 +1,120 @@
 'use client';
 
-import { useState, useRef, MouseEvent } from 'react';
-import { Play } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowUpRight, BookOpen, Play } from 'lucide-react';
+import { useState } from 'react';
+import type { Projeto } from '@/app/lib/projetos';
 
 type ProjectCardProps = {
-  name: string;
-  tag: string;
-  tagColor: string;
-  description: string;
-  videoUrl: string;
-  imageUrl?: string;
-  slug: string;
-  accentColor: string;
-  hashtags: string[];
-  index: number;
+  project: Projeto;
 };
 
-export default function ProjectCard({
-  name, tag, tagColor, description, videoUrl, imageUrl, accentColor, hashtags
-}: ProjectCardProps) {
+function getEmbedUrl(url: string) {
+  if (url.includes('youtube.com/shorts/')) {
+    const videoId = url.split('youtube.com/shorts/')[1].split('?')[0];
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  }
+
+  if (url.includes('youtube.com/watch?v=')) {
+    const videoId = new URL(url).searchParams.get('v');
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  }
+
+  return `${url}${url.includes('?') ? '&' : '?'}autoplay=1`;
+}
+
+export default function ProjectCard({ project }: ProjectCardProps) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [tiltStyle, setTiltStyle] = useState({});
-
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const rotateX = ((y - centerY) / centerY) * -5;
-    const rotateY = ((x - centerX) / centerX) * 5;
-
-    setTiltStyle({
-      transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-      transition: 'none'
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setTiltStyle({
-      transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg)',
-      transition: 'transform 300ms ease-out'
-    });
-  };
-
-  // Convert youtube watch/shorts URL to embed URL if needed
-  const getEmbedUrl = (url: string) => {
-    if (url.includes('youtube.com/shorts/')) {
-      const parts = url.split('youtube.com/shorts/');
-      const videoId = parts[1].split('?')[0];
-      return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-    }
-    if (url.includes('youtube.com/watch?v=')) {
-      const videoId = new URL(url).searchParams.get('v');
-      return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-    }
-    if (url.includes('youtube.com/embed/')) {
-      return url.includes('?') ? `${url}&autoplay=1` : `${url}?autoplay=1`;
-    }
-    return url;
-  };
 
   return (
-    <div 
-      className="group rounded-3xl overflow-hidden bg-[#0a0a0a] border border-white/[0.06] flex flex-col h-full transition-all duration-500 hover:border-white/20 relative"
-      style={{
-        ...tiltStyle,
-      }}
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div 
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl"
-        style={{
-          boxShadow: `0 0 40px ${accentColor}15, inset 0 0 0 1px ${accentColor}30`,
-        }}
-      />
-      <div 
-        className="w-full aspect-video relative overflow-hidden cursor-pointer z-10 bg-[#050505]"
-        onClick={() => setIsPlaying(true)}
-      >
-        {!isPlaying ? (
-          <div className="absolute inset-0 overflow-hidden">
-            {imageUrl && (
-              <img 
-                src={imageUrl} 
-                alt={name} 
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 flex items-center justify-center transition-all duration-300">
-              <div className="w-16 h-16 rounded-full bg-black/40 border border-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-white/20 group-hover:border-white/40 shadow-xl">
-                <Play className="text-white fill-white ml-1" size={24} />
-              </div>
-            </div>
-          </div>
-        ) : (
-          <iframe 
-            src={getEmbedUrl(videoUrl)} 
-            className="absolute inset-0 w-full h-full border-0"
+    <article className="project-card group">
+      <div className="relative aspect-[16/10] overflow-hidden bg-[#080808]">
+        {isPlaying ? (
+          <iframe
+            src={getEmbedUrl(project.videoUrl)}
+            title={`Demonstração do projeto ${project.nome}`}
+            className="absolute inset-0 h-full w-full border-0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            loading="lazy"
           />
+        ) : (
+          <>
+            {project.imageUrl && (
+              <Image
+                src={project.imageUrl}
+                alt={`Identidade visual do projeto ${project.nome}`}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent" />
+            <button
+              type="button"
+              onClick={() => setIsPlaying(true)}
+              className="absolute inset-0 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-400"
+              aria-label={`Assistir à demonstração do projeto ${project.nome}`}
+            >
+              <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white shadow-2xl backdrop-blur-md transition duration-300 group-hover:scale-110 group-hover:border-white/40 group-hover:bg-white/15">
+                <Play size={21} className="ml-0.5 fill-current" aria-hidden="true" />
+              </span>
+            </button>
+          </>
         )}
-      </div>
 
-      <div className="p-6 flex flex-col flex-grow relative z-10">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-xl font-bold uppercase tracking-wide">{name}</h3>
-          <span className={`px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full bg-white/5 ${tagColor}`}>
-            {tag}
+        <div className="pointer-events-none absolute left-5 top-5 flex items-center gap-2">
+          {project.featured && (
+            <span className="rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-amber-300 backdrop-blur-md">
+              Destaque
+            </span>
+          )}
+          <span className={`rounded-full border border-white/10 bg-black/45 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.18em] backdrop-blur-md ${project.tagColor}`}>
+            {project.tag}
           </span>
         </div>
+      </div>
 
-        <p className="text-sm text-gray-400 mb-6 flex-grow leading-relaxed">
-          {description}
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
+        <div className="mb-5">
+          <p className="mb-3 text-[10px] font-mono uppercase tracking-[0.18em] text-white/35">
+            {project.status}
+          </p>
+          <h3 className="text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-[1.75rem]">
+            {project.nome}
+          </h3>
+        </div>
+
+        <p className="mb-6 line-clamp-3 text-sm leading-7 text-white/55">
+          {project.overview}
         </p>
 
-        <div className="flex items-center justify-between mt-auto">
-          <div className="flex gap-2 font-mono text-[10px]">
-            {hashtags.map((ht, i) => (
-              <span key={i} style={{ color: accentColor, opacity: 0.7 }}>
-                {ht}
-              </span>
-            ))}
-          </div>
+        <ul className="mb-7 flex flex-wrap gap-2" aria-label={`Destaques do ${project.nome}`}>
+          {project.highlights.map((highlight) => (
+            <li key={highlight} className="rounded-lg border border-white/[0.07] bg-white/[0.035] px-2.5 py-1.5 text-[10px] font-mono uppercase tracking-wide text-white/50">
+              {highlight}
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-auto flex flex-col gap-3 border-t border-white/[0.07] pt-5 sm:flex-row sm:items-center sm:justify-between">
+          <Link href={`/projetos/${project.slug}`} className="project-primary-link">
+            <BookOpen size={15} aria-hidden="true" />
+            Ver estudo de caso
+          </Link>
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-secondary-link"
+            >
+              Código
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
+          )}
         </div>
       </div>
-    </div>
+    </article>
   );
 }

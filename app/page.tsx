@@ -9,7 +9,7 @@ import CursorGlow from "./components/CursorGlow";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#050505] text-white overflow-x-hidden">
+    <main id="conteudo-principal" className="min-h-screen bg-[#050505] text-white overflow-x-hidden">
       {/* Global cursor glow effect */}
       <CursorGlow />
 

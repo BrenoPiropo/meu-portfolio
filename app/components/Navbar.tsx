@@ -79,7 +79,9 @@ export default function Navbar() {
         <button
           className="md:hidden flex flex-col items-center justify-center w-8 h-8 gap-1.5 z-50 relative"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle Menu"
+          aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="menu-mobile"
         >
           <span
             className={`block w-5 h-0.5 bg-white transition-transform duration-300 ${
@@ -101,6 +103,8 @@ export default function Navbar() {
 
       {/* Mobile Nav */}
       <div
+        id="menu-mobile"
+        aria-hidden={!mobileMenuOpen}
         className={`md:hidden absolute top-full left-0 w-full bg-black/90 backdrop-blur-xl border-b border-white/5 transition-all duration-300 overflow-hidden ${
           mobileMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
         }`}

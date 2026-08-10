@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Astreu Hub - Documentação Resumida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --primary-color: #0b2545;
+        --accent-color: #133c55;
+        --accent-cyan: #386fa4;
+        --text-color: #2b2d42;
+        --bg-color: #ffffff;
+        --gray-bg: #f8f9fa;
+        --border-color: #dee2e6;
+        --code-bg: #1e1e24;
+        --code-text: #e0e1dd;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        color: var(--text-color);
+        line-height: 1.6;
+        background-color: var(--bg-color);
+        margin: 0;
+        padding: 0;
+        font-size: 11pt;
+    }
+
+    /* Print specific settings */
+    @page {
+        size: A4;
+        margin: 2cm;
+        @bottom-right {
+            content: "Página " counter(page);
+            font-family: 'Inter', sans-serif;
+            font-size: 9pt;
+            color: #666;
+        }
+        @bottom-left {
+            content: "Astreu Hub - Documentação Resumida";
+            font-family: 'Inter', sans-serif;
+            font-size: 9pt;
+            color: #666;
+        }
+    }
+
+    @media print {
+        .page-break { page-break-before: always; }
+        .no-break { page-break-inside: avoid; }
+        body { font-size: 10pt; }
+        .cover-page {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    h1, h2, h3, h4 {
+        font-family: 'Space Grotesk', sans-serif;
+        color: var(--primary-color);
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+        page-break-after: avoid;
+    }
+
+    h1 { font-size: 28pt; border-bottom: 2px solid var(--accent-cyan); padding-bottom: 10px; }
+    h2 { font-size: 18pt; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
+    h3 { font-size: 14pt; }
+
+    .cover-page {
+        text-align: center;
+        padding: 4cm 0;
+        border-bottom: 4px solid var(--accent-cyan);
+        margin-bottom: 2cm;
+    }
+
+    .cover-title {
+        font-size: 36pt;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+    }
+
+    .cover-subtitle {
+        font-family: 'Inter', sans-serif;
+        font-size: 16pt;
+        color: var(--accent-cyan);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 2cm;
+    }
+
+    .cover-meta {
+        font-size: 12pt;
+        color: #555;
+    }
+
+    p { margin-bottom: 1em; }
+
+    ul, ol { margin-bottom: 1.5em; padding-left: 2em; }
+    li { margin-bottom: 0.5em; }
+
+    /* Tables */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5em 0;
+        page-break-inside: avoid;
+        font-size: 10pt;
+    }
+
+    th, td {
+        border: 1px solid var(--border-color);
+        padding: 10px 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 600;
+        font-family: 'Space Grotesk', sans-serif;
+    }
+
+    tr:nth-child(even) { background-color: var(--gray-bg); }
+
+    /* Code Blocks */
+    pre {
+        background-color: var(--code-bg);
+        color: var(--code-text);
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 9.5pt;
+        margin: 1.5em 0;
+        page-break-inside: avoid;
+        border-left: 4px solid var(--accent-cyan);
+    }
+
+    code {
+        font-family: 'Courier New', Courier, monospace;
+        background-color: var(--gray-bg);
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        color: #d62828;
+    }
+
+    pre code { background-color: transparent; color: inherit; padding: 0; }
+
+    /* Callouts / Blockquotes */
+    blockquote {
+        margin: 1.5em 0;
+        padding: 15px 20px;
+        background-color: #f0f8ff;
+        border-left: 5px solid var(--accent-cyan);
+        border-radius: 0 6px 6px 0;
+        font-style: italic;
+    }
+
+    /* Custom Diagrams */
+    .diagram-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 2em 0;
+        padding: 20px;
+        background-color: var(--gray-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        page-break-inside: avoid;
+    }
+
+    .arch-box {
+        background-color: white;
+        border: 2px solid var(--primary-color);
+        padding: 15px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-align: center;
+        width: 80%;
+        margin: 10px 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .arch-box-accent { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+
+    .arch-row {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .arch-row .arch-box { width: 30%; }
+
+    .arch-arrow {
+        color: var(--accent-cyan);
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    /* Pipeline Steps */
+    .pipeline {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 2em 0;
+        page-break-inside: avoid;
+    }
+
+    .step {
+        display: flex;
+        align-items: center;
+        background-color: var(--gray-bg);
+        padding: 12px 15px;
+        border-radius: 6px;
+        border-left: 4px solid var(--accent-cyan);
+    }
+
+    .step-num {
+        background-color: var(--primary-color);
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 15px;
+        flex-shrink: 0;
+        font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .step-content strong { color: var(--primary-color); margin-right: 10px; }
+
+    .footer-note {
+        text-align: center;
+        margin-top: 3cm;
+        padding-top: 1cm;
+        border-top: 1px solid var(--border-color);
+        color: #666;
+        font-size: 9pt;
+    }
+
+    .print-header { display: none; }
+
+    @media screen {
+        body { max-width: 900px; margin: 40px auto; padding: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
+    }
+</style>
+</head>
+<body>
+
+<div class="cover-page">
+    <div class="cover-title">Astreu Hub</div>
+    <div class="cover-subtitle">Documentação Resumida</div>
+    <div class="cover-meta">
+        <p><strong>Versão:</strong> 1.0.0</p>
+        <p><strong>Autor:</strong> Breno Piropo</p>
+        <p><strong>Data:</strong> Agosto 2026</p>
+    </div>
+</div>
+
+<h2>O que é o Astreu Hub?</h2>
+<p>O <strong>Astreu Hub</strong> é uma plataforma mobile de exploração astronômica desenvolvida como Trabalho de Conclusão de Curso (TCC). A aplicação integra três pilares:</p>
+<ol>
+    <li><strong>Exploração Científica</strong> — Dados em tempo real de exoplanetas, estrelas, constelações e asteroides vindos da NASA, ESA e Caltech.</li>
+    <li><strong>Assistente de IA (RAG)</strong> — Chat inteligente que consulta artigos científicos reais antes de responder, eliminando alucinações.</li>
+    <li><strong>Comunidade</strong> — Feed social com artigos, fotos astronômicas, diário de bordo e metas de exploração.</li>
+</ol>
+
+<h2>Arquitetura Resumida</h2>
+<div class="diagram-container">
+    <div class="arch-box arch-box-accent">📱 React Native / Expo (Frontend)</div>
+    <div class="arch-arrow">↕ REST API</div>
+    <div class="arch-box">⚙️ NestJS (Backend, Porta 3000)</div>
+    <div class="arch-arrow">↕</div>
+    <div class="arch-row">
+        <div class="arch-box">🗄️ MySQL<br><small>(Dados)</small></div>
+        <div class="arch-box">🧠 Ollama/Llama 3<br><small>(IA)</small></div>
+        <div class="arch-box">🔮 ChromaDB<br><small>(Vetores)</small></div>
+    </div>
+</div>
+
+<h2>Stack Tecnológico</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Camada</th>
+            <th>Tecnologias</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Frontend</strong></td>
+            <td>React Native 0.81, Expo SDK 54, TypeScript, Axios, Gifted Chat</td>
+        </tr>
+        <tr>
+            <td><strong>Backend</strong></td>
+            <td>NestJS 10, TypeORM, MySQL, Multer, bcrypt</td>
+        </tr>
+        <tr>
+            <td><strong>IA/RAG</strong></td>
+            <td>LangChain, Ollama (Llama 3 + mxbai-embed-large), ChromaDB</td>
+        </tr>
+        <tr>
+            <td><strong>APIs Externas</strong></td>
+            <td>NASA APOD, NASA NeoWs, Caltech Exoplanet Archive, ESA Gaia DR3, arXiv</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="no-break">
+<h2>Telas do App (9 principais)</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Tela</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Foto do Dia</strong></td>
+            <td>Imagem astronômica diária da NASA (APOD) com curiosidades</td>
+        </tr>
+        <tr>
+            <td><strong>Exoplanetas</strong></td>
+            <td>Catálogo dos 50 exoplanetas mais recentes (Caltech)</td>
+        </tr>
+        <tr>
+            <td><strong>Estrelas Próximas</strong></td>
+            <td>Dados do ESA Gaia DR3 com link para Aladin Lite</td>
+        </tr>
+        <tr>
+            <td><strong>O Céu</strong></td>
+            <td>Guia de constelações do Hemisfério Sul com história e estrelas</td>
+        </tr>
+        <tr>
+            <td><strong>Dataset Cósmico</strong></td>
+            <td>Galeria de astrofotografia por categorias com favoritos</td>
+        </tr>
+        <tr>
+            <td><strong>Comunidade</strong></td>
+            <td>Feed social com posts (Estudos + Galeria) e upload de PDFs</td>
+        </tr>
+        <tr>
+            <td><strong>Chat IA</strong></td>
+            <td>Interface de chat com RAG — respostas baseadas em artigos reais</td>
+        </tr>
+        <tr>
+            <td><strong>Perfil / Diário</strong></td>
+            <td>Calendário, observações diárias com fotos e metas de exploração</td>
+        </tr>
+        <tr>
+            <td><strong>Login</strong></td>
+            <td>Autenticação por email e senha</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<div class="page-break"></div>
+
+<h2>Pipeline RAG (Como a IA Funciona)</h2>
+<div class="pipeline">
+    <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Ingestão</strong> → PDFs do arXiv carregados via PDFLoader</div>
+    </div>
+    <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Chunking</strong> → Texto dividido em blocos de 400 chars (overlap 80)</div>
+    </div>
+    <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Embedding</strong> → Vetorização via mxbai-embed-large (Ollama local)</div>
+    </div>
+    <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>ChromaDB</strong> → Vetores armazenados com metadados</div>
+    </div>
+    <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content"><strong>Busca</strong> → Top 4 chunks por similaridade de cosseno</div>
+    </div>
+    <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-content"><strong>Geração</strong> → Llama 3 responde com o contexto + referências</div>
+    </div>
+</div>
+
+<p><strong>Diferencial:</strong> O LLM responde <strong>apenas</strong> com base no contexto recuperado. Se não encontra informação nos artigos, admite que não sabe.</p>
+
+<h2>Banco de Dados (MySQL)</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Tabela</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>usuarios</code></td>
+            <td>Usuários (nome, email, senha hash)</td>
+        </tr>
+        <tr>
+            <td><code>posts_comunidade</code></td>
+            <td>Posts da comunidade (tipo, título, mídia, PDF, conteúdo)</td>
+        </tr>
+        <tr>
+            <td><code>diario_bordo</code></td>
+            <td>Entradas do diário astronômico</td>
+        </tr>
+        <tr>
+            <td><code>metas_exploracao</code></td>
+            <td>Metas de exploração do usuário</td>
+        </tr>
+        <tr>
+            <td><code>fotos_diario</code></td>
+            <td>Fotos anexadas ao diário (Base64)</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Endpoints Principais da API</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Módulo</th>
+            <th>Endpoints</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>AI</strong></td>
+            <td><code>POST /ai/ask</code>, <code>POST /ai/seed</code>, <code>GET /ai/sessions</code>, <code>GET /ai/history/:id</code></td>
+            <td>Chat RAG e ingestão</td>
+        </tr>
+        <tr>
+            <td><strong>Users</strong></td>
+            <td><code>POST /users</code>, <code>POST /users/login</code>, <code>GET/PATCH/DELETE /users/:id</code></td>
+            <td>CRUD de usuários</td>
+        </tr>
+        <tr>
+            <td><strong>Posts</strong></td>
+            <td><code>POST /posts</code>, <code>GET /posts</code>, <code>GET /posts/:id</code>, <code>DELETE /posts/:id</code></td>
+            <td>Posts da comunidade</td>
+        </tr>
+        <tr>
+            <td><strong>Diário</strong></td>
+            <td><code>POST/GET /diario</code>, <code>POST/GET/PATCH/DELETE /diario/metas</code></td>
+            <td>Diário e metas</td>
+        </tr>
+        <tr>
+            <td><strong>Gallery</strong></td>
+            <td><code>GET /gallery/:category</code></td>
+            <td>Imagens do dataset</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Como Rodar o Projeto</h2>
+<h3>Pré-requisitos</h3>
+<ul>
+    <li>Node.js 18+, MySQL 8, Ollama, ChromaDB</li>
+</ul>
+
+<h3>Passos</h3>
+<pre><code class="language-bash"><span style="color: #6c757d"># 1. Banco de dados</span>
+mysql -u root -p -e "CREATE DATABASE astreu_db;"
+
+<span style="color: #6c757d"># 2. Modelos de IA</span>
+ollama pull llama3
+ollama pull mxbai-embed-large
+
+<span style="color: #6c757d"># 3. ChromaDB</span>
+chroma run --host 0.0.0.0 --port 8000
+
+<span style="color: #6c757d"># 4. Backend</span>
+cd astreu-backend
+npm install
+npm run start:dev    <span style="color: #6c757d"># → http://localhost:3000</span>
+
+<span style="color: #6c757d"># 5. Seed (popular banco vetorial)</span>
+node seed.js
+
+<span style="color: #6c757d"># 6. Frontend</span>
+cd ..
+npm install
+npx expo start       <span style="color: #6c757d"># → Escanear QR ou 'a' para Android</span></code></pre>
+
+<h2>Módulos do Backend</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Módulo</th>
+            <th>Arquivos</th>
+            <th>Responsabilidade</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>AI</strong></td>
+            <td><code>ai.module</code>, <code>ai.controller</code>, <code>ai.service</code></td>
+            <td>Pipeline RAG, chat, ingestão de PDFs</td>
+        </tr>
+        <tr>
+            <td><strong>Users</strong></td>
+            <td><code>users.module</code>, <code>users.controller</code>, <code>users.service</code>, <code>user.entity</code></td>
+            <td>CRUD e login de usuários</td>
+        </tr>
+        <tr>
+            <td><strong>Auth</strong></td>
+            <td><code>auth.module</code>, <code>auth.controller</code>, <code>auth.service</code></td>
+            <td>Autenticação (bcrypt)</td>
+        </tr>
+        <tr>
+            <td><strong>Posts</strong></td>
+            <td><code>posts.module</code>, <code>posts.controller</code>, <code>posts.service</code>, <code>post.entity</code></td>
+            <td>Posts da comunidade com upload</td>
+        </tr>
+        <tr>
+            <td><strong>Diário</strong></td>
+            <td><code>diario.module</code>, <code>diario.controller</code>, <code>diario.service</code> + sub-módulo fotos</td>
+            <td>Diário e metas</td>
+        </tr>
+        <tr>
+            <td><strong>Gallery</strong></td>
+            <td><code>gallery.module</code>, <code>gallery.controller</code></td>
+            <td>Servir imagens do dataset por categoria</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Pontos de Melhoria Identificados</h2>
+<ul>
+    <li>⚠️ Autenticação sem JWT (credenciais expostas na query string)</li>
+    <li>⚠️ Senhas de banco hardcoded no código</li>
+    <li>⚠️ Sem métricas de avaliação do RAG</li>
+    <li>⚠️ Dataset sem curadoria (fotos reais misturadas com ilustrações)</li>
+    <li>⚠️ Tradução PT→EN adiciona latência à busca vetorial</li>
+    <li>⚠️ Artigos do arXiv sem filtro de confiabilidade</li>
+</ul>
+
+<blockquote>
+    <p>📖 Para detalhes completos, consulte a <strong>Documentação Completa</strong> (<code>Documentacao_Completa_Astreu_Hub.md</code>).</p>
+</blockquote>
+
+</body>
+</html>

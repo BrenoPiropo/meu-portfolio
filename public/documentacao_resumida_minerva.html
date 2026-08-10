@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentação Resumida — Minerva English App</title>
+  <style>
+:root {
+  --bg: #0D0B1E;
+  --surface: #16132A;
+  --surface-card: #1E1A3A;
+  --text: #F0EDFF;
+  --text-muted: #A5A2C8;
+  --primary: #7F56D9;
+  --primary-glow: #9E77ED;
+  --accent: #00E5FF;
+  --border: rgba(127, 86, 217, 0.25);
+  --code-bg: #0A0817;
+  --success: #00FF9D;
+  --warning: #FFB800;
+  --danger: #FF385C;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 48px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(127, 86, 217, 0.15);
+}
+
+h1 {
+  font-size: 2.2rem;
+  color: #FFFFFF;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 12px;
+  margin-top: 10px;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+
+h2 {
+  font-size: 1.6rem;
+  color: var(--accent);
+  margin-top: 36px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+h3 {
+  font-size: 1.25rem;
+  color: var(--primary-glow);
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+p, li {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+p strong, li strong {
+  color: var(--text);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--accent);
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: #FFFFFF;
+  border-bottom-style: solid;
+}
+
+blockquote {
+  background: var(--surface-card);
+  border-left: 4px solid var(--accent);
+  padding: 16px 20px;
+  border-radius: 0 12px 12px 0;
+  margin: 20px 0;
+}
+
+blockquote p {
+  color: var(--text);
+  margin-bottom: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  background: var(--surface-card);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+th, td {
+  padding: 14px 18px;
+  text-align: left;
+}
+
+th {
+  background: rgba(127, 86, 217, 0.2);
+  color: var(--text);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  border-bottom: 1px solid rgba(127, 86, 217, 0.1);
+  color: var(--text-muted);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+code {
+  font-family: 'Consolas', 'Monaco', monospace;
+  background: var(--code-bg);
+  color: var(--accent);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  border: 1px solid var(--border);
+}
+
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  border: none;
+  color: #E2E8F0;
+}
+
+ul, ol {
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+@media print {
+  body { background: #FFF; color: #000; padding: 0; }
+  .container { border: none; box-shadow: none; padding: 0; max-width: 100%; }
+  h1, h2, h3 { color: #000; border-color: #DDD; }
+  p, li, td { color: #333; }
+  table { border: 1px solid #DDD; }
+  th { background: #F5F5F5; color: #000; }
+  blockquote { background: #F9F9F9; border-left-color: #00E5FF; }
+  pre, code { background: #F5F5F5; color: #000; border-color: #DDD; }
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="documentacao-resumida-minerva-english-app">📄 Documentação Resumida — Minerva English App</h1>
+<blockquote>
+<p><strong>Versão:</strong> 1.0.0 | <strong>Agosto 2026</strong><br />
+<strong>Repositório Frontend:</strong> <a href="https://github.com/BrenoPiropo/Readingapp">github.com/BrenoPiropo/Readingapp</a><br />
+<strong>Repositório Backend:</strong> <a href="https://github.com/BrenoPiropo/Minerva-backend">github.com/BrenoPiropo/Minerva-backend</a><br />
+<strong>Backend em Produção:</strong> <code>https://minerva-backend-e0sa.onrender.com</code></p>
+</blockquote>
+<hr />
+<h2 id="1-o-que-e-o-minerva">1. O que é o Minerva?</h2>
+<p>Aplicativo mobile gamificado para aprendizado de vocabulário em inglês, voltado a falantes de português brasileiro. Combina flash cards, jogos (forca, enigmas, embaralhar palavras), tutor de IA, ranking global e desafios diários com um sistema de XP e níveis para manter o engajamento.</p>
+<hr />
+<h2 id="2-stack-tecnologica">2. Stack Tecnológica</h2>
+<table>
+<thead>
+<tr>
+<th>Camada</th>
+<th>Tecnologias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Frontend</strong></td>
+<td>React Native (Expo 52), TypeScript, Expo Router, Axios, AsyncStorage, Expo Speech</td>
+</tr>
+<tr>
+<td><strong>Backend</strong></td>
+<td>NestJS, TypeORM, MySQL, JWT + bcrypt, Passport, Helmet, ThrottlerGuard</td>
+</tr>
+<tr>
+<td><strong>IA</strong></td>
+<td>Google Gemini API (<code>gemini-1.5-flash</code>) via gateway no backend</td>
+</tr>
+<tr>
+<td><strong>Infraestrutura</strong></td>
+<td>Docker, Render (hospedagem), EAS Build (APK)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-telas-do-aplicativo">3. Telas do Aplicativo</h2>
+<table>
+<thead>
+<tr>
+<th>Tela</th>
+<th>Arquivo</th>
+<th>Função Principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Login</strong></td>
+<td><code>login.tsx</code></td>
+<td>Autenticação com e-mail e senha</td>
+</tr>
+<tr>
+<td><strong>Cadastro</strong></td>
+<td><code>register.tsx</code></td>
+<td>Registro de novo usuário (senha mín. 6 caracteres)</td>
+</tr>
+<tr>
+<td><strong>Dashboard</strong></td>
+<td><code>Categories.tsx</code></td>
+<td>Hub de navegação — XP, nível, streak, acesso a todos os modos</td>
+</tr>
+<tr>
+<td><strong>Flash Cards</strong></td>
+<td><code>Home.tsx</code></td>
+<td>Estudo de vocabulário com cartões e pronúncia por voz</td>
+</tr>
+<tr>
+<td><strong>Revisão</strong></td>
+<td><code>Review.tsx</code></td>
+<td>Repetição espaçada de palavras erradas</td>
+</tr>
+<tr>
+<td><strong>Embaralhar</strong></td>
+<td><code>WordScramble.tsx</code></td>
+<td>Jogo de desembaralhar letras</td>
+</tr>
+<tr>
+<td><strong>Enigma Master</strong></td>
+<td><code>Charade.tsx</code></td>
+<td>Charadas/enigmas em inglês</td>
+</tr>
+<tr>
+<td><strong>Jogo da Forca</strong></td>
+<td><code>Force.tsx</code></td>
+<td>Forca digital com teclado na tela</td>
+</tr>
+<tr>
+<td><strong>Tutor IA</strong></td>
+<td><code>AiTutor.tsx</code></td>
+<td>Chat com IA "Minerva" (Google Gemini)</td>
+</tr>
+<tr>
+<td><strong>Desafios</strong></td>
+<td><code>Quests.tsx</code></td>
+<td>Missões diárias com recompensas de XP</td>
+</tr>
+<tr>
+<td><strong>Ranking</strong></td>
+<td><code>Ranking.tsx</code></td>
+<td>Placar global de todos os jogadores</td>
+</tr>
+<tr>
+<td><strong>Perfil</strong></td>
+<td><code>perfil.tsx</code></td>
+<td>Estatísticas, conquistas e logout</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-endpoints-da-api">4. Endpoints da API</h2>
+<h3 id="autenticacao">Autenticação</h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><code>/auth/login</code></td>
+<td>Login → retorna JWT token + dados do usuário</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/auth/register</code></td>
+<td>Cadastro de novo usuário</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/auth/me</code></td>
+<td>Perfil do usuário autenticado (protegido por JWT)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vocabulario-e-ia">Vocabulário e IA</h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/words/pratica</code></td>
+<td>Busca palavras para estudo (filtro por dificuldade e limite)</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/words/ai-tutor</code></td>
+<td>Gateway para chat com IA Gemini</td>
+</tr>
+</tbody>
+</table>
+<h3 id="progresso-e-revisao">Progresso e Revisão</h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><code>/status/registrar</code></td>
+<td>Registra acerto/erro de uma palavra (+10 XP por acerto)</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/status/revisao/{userId}</code></td>
+<td>Palavras pendentes para revisão espaçada</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gamificacao">Gamificação</h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/desafios/diarios</code></td>
+<td>Desafios diários do usuário</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/desafios/resgatar/{id}</code></td>
+<td>Resgata recompensa de XP de desafio concluído</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/usuarios/ranking</code></td>
+<td>Top 10 jogadores por XP</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-fluxo-de-autenticacao-resumo">5. Fluxo de Autenticação (Resumo)</h2>
+<ol>
+<li><strong>Primeiro acesso</strong> → Usuário faz login/cadastro → Token JWT salvo no dispositivo</li>
+<li><strong>Acessos seguintes</strong> → App detecta token salvo → <strong>entra direto</strong> no Dashboard (sem pedir senha)</li>
+<li><strong>Token expirado</strong> → Backend retorna 401 → App limpa dados e exibe tela de login</li>
+<li><strong>Logout manual</strong> → Usuário clica "Sair" no perfil → Token removido → Tela de login</li>
+</ol>
+<hr />
+<h2 id="6-sistema-de-gamificacao">6. Sistema de Gamificação</h2>
+<table>
+<thead>
+<tr>
+<th>Mecânica</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>XP (Experiência)</strong></td>
+<td>+10 XP por acerto nos jogos/flash cards</td>
+</tr>
+<tr>
+<td><strong>Níveis</strong></td>
+<td>Nível = <code>Math.floor(XP / 100) + 1</code></td>
+</tr>
+<tr>
+<td><strong>Ofensiva (Streak)</strong></td>
+<td>Dias consecutivos de estudo</td>
+</tr>
+<tr>
+<td><strong>Desafios Diários</strong></td>
+<td>3 missões diárias com bônus de XP (30, 50, 100 XP)</td>
+</tr>
+<tr>
+<td><strong>Ranking Global</strong></td>
+<td>Placar dos 10 melhores jogadores por XP total</td>
+</tr>
+<tr>
+<td><strong>Conquistas</strong></td>
+<td>Badges desbloqueáveis (Primeiros Passos, Fogo nos Estudos, etc.)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-comandos-essenciais">7. Comandos Essenciais</h2>
+<pre><code class="language-bash"># Rodar em desenvolvimento
+npx expo start
+
+# Verificar tipos TypeScript
+npx tsc --noEmit
+
+# Rodar testes
+npm test -- --watchAll=false
+
+# Gerar APK Android
+npx eas build -p android --profile preview
+</code></pre>
+<hr />
+<h2 id="8-estrutura-de-pastas-simplificada">8. Estrutura de Pastas (Simplificada)</h2>
+<pre><code>AppEnglish/
+├── app/              # Rotas (Expo Router)
+├── src/
+│   ├── screen/       # 12 telas do aplicativo
+│   ├── components/   # Componentes reutilizáveis (WordCard, AppLogo, ScreenWrapper...)
+│   ├── service/      # API client (Axios) + AI Service
+│   ├── context/      # Estado global (ScoreContext)
+│   └── styles/       # Tema cyberpunk dark (cores, sombras)
+├── assets/images/    # Logo e ícones do app
+├── app.json          # Configuração Expo
+└── eas.json          # Configuração EAS Build
+</code></pre>
+<hr />
+<blockquote>
+<p><strong>Minerva English App</strong> — Aprenda Inglês de Forma Gamificada 🦉✨<br />
+Para detalhes técnicos completos, consulte a <strong>Documentação Completa</strong>.</p>
+</blockquote>
+  </div>
+</body>
+</html>

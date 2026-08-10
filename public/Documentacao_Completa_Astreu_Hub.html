@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentação Completa — Astreu Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #0B0D17;
+  --secondary: #2f95dc;
+  --text: #333333;
+  --bg: #ffffff;
+  --gray: #f9f9f9;
+  --border: #e0e0e0;
+}
+@page {
+  size: A4;
+  margin: 20mm;
+  @top-center { content: "Astreu Hub - Documentação Técnica"; font-family: 'Inter', sans-serif; font-size: 10pt; color: #666; }
+  @bottom-center { content: counter(page); font-family: 'Inter', sans-serif; font-size: 10pt; }
+}
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  font-size: 11pt;
+  margin: 0;
+  padding: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--primary);
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  page-break-after: avoid;
+}
+h1 { font-size: 24pt; border-bottom: 2px solid var(--primary); padding-bottom: 10px; }
+h2 { font-size: 18pt; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
+h3 { font-size: 14pt; }
+p { margin-bottom: 1em; }
+a { color: var(--secondary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.cover-page {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  page-break-after: always;
+}
+.cover-logo { font-size: 80pt; margin-bottom: 20px; }
+.cover-title { font-size: 36pt; font-family: 'Space Grotesk', sans-serif; margin-bottom: 10px; }
+.cover-subtitle { font-size: 18pt; color: #666; margin-bottom: 40px; }
+.cover-meta { font-size: 12pt; color: #444; }
+.toc { page-break-after: always; }
+.toc ul { list-style: none; padding-left: 0; }
+.toc li { margin-bottom: 8px; }
+.toc ul ul { padding-left: 20px; font-size: 0.95em; }
+pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9.5pt;
+  page-break-inside: avoid;
+}
+code {
+  font-family: 'Courier New', Courier, monospace;
+  background: var(--gray);
+  color: #c7254e;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+pre code { background: transparent; color: inherit; padding: 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  page-break-inside: avoid;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 10px;
+  text-align: left;
+}
+th {
+  background: var(--gray);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+}
+tr:nth-child(even) { background: #f2f2f2; }
+.alert {
+  padding: 15px;
+  margin: 20px 0;
+  border-left: 4px solid;
+  background: var(--gray);
+  page-break-inside: avoid;
+}
+.alert-important { border-color: #e74c3c; background: #fdf2f0; }
+.alert-warning { border-color: #f39c12; background: #fdf9f1; }
+.alert-note { border-color: #3498db; background: #f1f8fc; }
+.alert-tip { border-color: #2ecc71; background: #f0fbf4; }
+.alert strong { display: block; margin-bottom: 5px; }
+.diagram-box {
+  background: var(--gray);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  page-break-inside: avoid;
+  text-align: center;
+}
+.diagram-node {
+  display: inline-block;
+  background: white;
+  border: 2px solid var(--primary);
+  border-radius: 6px;
+  padding: 10px 15px;
+  margin: 10px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.diagram-group {
+  border: 2px dashed #bbb;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 15px 0;
+  background: rgba(255,255,255,0.5);
+}
+.diagram-group-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #555;
+}
+.diagram-arrow {
+  display: inline-block;
+  margin: 0 10px;
+  color: var(--primary);
+  font-weight: bold;
+}
+.diagram-er-table {
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  margin: 10px;
+  background: white;
+  min-width: 200px;
+}
+.diagram-er-header {
+  background: var(--primary);
+  color: white;
+  padding: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: bold;
+  border-radius: 4px 4px 0 0;
+}
+.diagram-er-row {
+  padding: 5px 8px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9em;
+  text-align: left;
+}
+.diagram-er-row:last-child { border-bottom: none; }
+.diagram-er-pk { font-weight: bold; color: #d35400; }
+.diagram-er-fk { font-style: italic; color: #2980b9; }
+</style>
+</head>
+<body>
+
+<div class="cover-page">
+  <div class="cover-logo">🔭</div>
+  <div class="cover-title">Documentação Completa</div>
+  <div class="cover-subtitle">Astreu Hub</div>
+  <div class="cover-meta">
+    <p><strong>Autor:</strong> Breno Piropo</p>
+    <p><strong>Tipo:</strong> Trabalho de Conclusão de Curso (TCC)</p>
+    <p><strong>Versão:</strong> 1.0.0 | <strong>Data:</strong> Agosto 2026</p>
+  </div>
+</div>
+
+<div class="toc">
+  <h2>Sumário</h2>
+  <ul>
+    <li><a href="#sec1">1. Visão Geral do Projeto</a></li>
+    <li><a href="#sec2">2. Arquitetura do Sistema</a></li>
+    <li><a href="#sec3">3. Stack Tecnológico</a></li>
+    <li><a href="#sec4">4. Estrutura de Diretórios</a></li>
+    <li><a href="#sec5">5. Frontend — React Native / Expo</a>
+      <ul>
+        <li><a href="#sec51">5.1 Configurações do Projeto</a></li>
+        <li><a href="#sec52">5.2 Navegação e Rotas</a></li>
+        <li><a href="#sec53">5.3 Telas (Screens)</a></li>
+        <li><a href="#sec54">5.4 Componentes Reutilizáveis</a></li>
+        <li><a href="#sec55">5.5 Camada de Serviços</a></li>
+        <li><a href="#sec56">5.6 Constantes e Temas</a></li>
+      </ul>
+    </li>
+    <li><a href="#sec6">6. Backend — NestJS</a>
+      <ul>
+        <li><a href="#sec61">6.1 Configuração e Entry Point</a></li>
+        <li><a href="#sec62">6.2 Módulo de IA (RAG)</a></li>
+        <li><a href="#sec63">6.3 Módulo de Usuários</a></li>
+        <li><a href="#sec64">6.4 Módulo de Autenticação</a></li>
+        <li><a href="#sec65">6.5 Módulo de Posts (Comunidade)</a></li>
+        <li><a href="#sec66">6.6 Módulo de Diário de Bordo</a></li>
+        <li><a href="#sec67">6.7 Módulo de Galeria (Dataset)</a></li>
+      </ul>
+    </li>
+    <li><a href="#sec7">7. Pipeline RAG — Detalhamento Técnico</a></li>
+    <li><a href="#sec8">8. Banco de Dados</a></li>
+    <li><a href="#sec9">9. APIs Externas Integradas</a></li>
+    <li><a href="#sec10">10. Referência de Endpoints da API</a></li>
+    <li><a href="#sec11">11. Variáveis de Ambiente</a></li>
+    <li><a href="#sec12">12. Guia de Instalação e Execução</a></li>
+    <li><a href="#sec13">13. Seed de Dados (arXiv)</a></li>
+  </ul>
+</div>
+
+<div class="content">
+
+<h2 id="sec1">1. Visão Geral do Projeto</h2>
+<p>O <strong>Astreu Hub</strong> é uma plataforma mobile de exploração astronômica que integra dados científicos em tempo real, uma comunidade colaborativa de entusiastas e um assistente de inteligência artificial baseado em <strong>RAG (Retrieval-Augmented Generation)</strong>.</p>
+<h3>Objetivo</h3>
+<p>Criar um ecossistema onde o usuário possa:</p>
+<ul>
+  <li>Explorar dados astronômicos reais (exoplanetas, estrelas, constelações, asteroides)</li>
+  <li>Interagir com uma IA que responde perguntas de astronomia consultando artigos científicos reais</li>
+  <li>Compartilhar descobertas, estudos e astrofotografias com outros entusiastas</li>
+  <li>Manter um diário de bordo astronômico pessoal</li>
+</ul>
+<h3>Diferencial Técnico</h3>
+<p>O assistente <strong>Astreu AI</strong> utiliza a técnica <strong>RAG</strong>, onde o modelo de linguagem (Llama 3) <strong>não depende apenas de sua memória treinada</strong> — ele busca trechos relevantes em artigos científicos indexados antes de gerar qualquer resposta, eliminando alucinações e garantindo respostas fundamentadas em fontes reais.</p>
+
+<hr>
+
+<h2 id="sec2">2. Arquitetura do Sistema</h2>
+
+<div class="diagram-box">
+  <div class="diagram-group">
+    <div class="diagram-group-title">📱 Frontend Mobile</div>
+    <div class="diagram-node">React Native + Expo</div>
+    <div class="diagram-node">Expo Router</div>
+    <div class="diagram-node">AsyncStorage</div>
+  </div>
+  <div class="diagram-arrow">↓ REST API ↓</div>
+  <div class="diagram-group">
+    <div class="diagram-group-title">⚙️ Backend API (NestJS - Port 3000)</div>
+    <div class="diagram-node">Módulo AI</div>
+    <div class="diagram-node">Módulo Users</div>
+    <div class="diagram-node">Módulo Posts</div>
+    <div class="diagram-node">Módulo Diário</div>
+    <div class="diagram-node">Módulo Gallery</div>
+    <div class="diagram-node">Módulo Auth</div>
+  </div>
+  <div class="diagram-arrow">↓ TCP / HTTP ↓</div>
+  <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+    <div class="diagram-group" style="flex:1;">
+      <div class="diagram-group-title">🗄️ Armazenamento</div>
+      <div class="diagram-node">MySQL (astreu_db)</div>
+      <div class="diagram-node">ChromaDB</div>
+      <div class="diagram-node">Uploads (FS)</div>
+    </div>
+    <div class="diagram-group" style="flex:1;">
+      <div class="diagram-group-title">🤖 IA Local</div>
+      <div class="diagram-node">Ollama</div>
+      <div class="diagram-node">Llama 3</div>
+      <div class="diagram-node">mxbai-embed-large</div>
+    </div>
+    <div class="diagram-group" style="flex:1;">
+      <div class="diagram-group-title">🌐 APIs Externas</div>
+      <div class="diagram-node">NASA APOD</div>
+      <div class="diagram-node">Caltech TAP</div>
+      <div class="diagram-node">ESA Gaia</div>
+    </div>
+  </div>
+</div>
+
+<h3>Comunicação</h3>
+<table>
+<thead><tr><th>De</th><th>Para</th><th>Protocolo</th><th>Porta</th></tr></thead>
+<tbody>
+<tr><td>Frontend</td><td>Backend NestJS</td><td>HTTP REST</td><td>3000</td></tr>
+<tr><td>Backend</td><td>MySQL</td><td>TCP</td><td>3306</td></tr>
+<tr><td>Backend (AI)</td><td>ChromaDB</td><td>HTTP</td><td>8000</td></tr>
+<tr><td>Backend (AI)</td><td>Ollama</td><td>HTTP</td><td>11434</td></tr>
+<tr><td>Frontend</td><td>NASA API</td><td>HTTPS</td><td>443</td></tr>
+<tr><td>Frontend</td><td>Caltech TAP</td><td>HTTPS</td><td>443</td></tr>
+<tr><td>Frontend</td><td>ESA Gaia TAP</td><td>HTTPS</td><td>443</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2 id="sec3">3. Stack Tecnológico</h2>
+<h3>Frontend</h3>
+<table>
+<thead><tr><th>Tecnologia</th><th>Versão</th><th>Propósito</th></tr></thead>
+<tbody>
+<tr><td>React Native</td><td>0.81.5</td><td>Framework mobile cross-platform</td></tr>
+<tr><td>Expo</td><td>SDK 54</td><td>Toolchain, build, OTA updates</td></tr>
+<tr><td>Expo Router</td><td>6.0.22</td><td>Navegação file-based</td></tr>
+<tr><td>TypeScript</td><td>5.9.2</td><td>Tipagem estática</td></tr>
+<tr><td>Axios</td><td>1.13.4</td><td>Cliente HTTP</td></tr>
+<tr><td>React Native Gifted Chat</td><td>3.4.0</td><td>Interface de chat</td></tr>
+<tr><td>React Native Calendars</td><td>1.1314.0</td><td>Calendário no diário</td></tr>
+<tr><td>AsyncStorage</td><td>2.2.0</td><td>Persistência local</td></tr>
+<tr><td>Expo Image Picker</td><td>17.0.10</td><td>Câmera / Galeria</td></tr>
+<tr><td>Expo Document Picker</td><td>14.0.8</td><td>Upload de PDFs</td></tr>
+<tr><td>React Native Reanimated</td><td>4.1.1</td><td>Animações avançadas</td></tr>
+</tbody>
+</table>
+
+<h3>Backend</h3>
+<table>
+<thead><tr><th>Tecnologia</th><th>Versão</th><th>Propósito</th></tr></thead>
+<tbody>
+<tr><td>NestJS</td><td>10.x</td><td>Framework backend TypeScript</td></tr>
+<tr><td>TypeORM</td><td>0.3.28</td><td>ORM para MySQL</td></tr>
+<tr><td>MySQL</td><td>8.x</td><td>Banco de dados relacional</td></tr>
+<tr><td>Multer</td><td>2.0.0</td><td>Upload de arquivos</td></tr>
+<tr><td>bcrypt</td><td>6.0.0</td><td>Hash de senhas</td></tr>
+</tbody>
+</table>
+
+<h3>Inteligência Artificial</h3>
+<table>
+<thead><tr><th>Tecnologia</th><th>Versão</th><th>Propósito</th></tr></thead>
+<tbody>
+<tr><td>LangChain</td><td>1.5.3</td><td>Framework de orquestração RAG</td></tr>
+<tr><td>@langchain/ollama</td><td>1.3.0</td><td>Integração Ollama</td></tr>
+<tr><td>ChromaDB</td><td>3.5.0</td><td>Banco vetorial</td></tr>
+<tr><td>Ollama</td><td>Local</td><td>Servidor de LLMs locais</td></tr>
+<tr><td>Llama 3</td><td>—</td><td>LLM para geração de texto</td></tr>
+<tr><td>mxbai-embed-large</td><td>—</td><td>Modelo de embeddings</td></tr>
+<tr><td>pdf-parse</td><td>2.4.5</td><td>Extração de texto de PDFs</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2 id="sec4">4. Estrutura de Diretórios</h2>
+<pre><code>Astreu/
+├── app/                          # Telas e rotas (Expo Router)
+│   ├── (tabs)/                   # Navegação por abas
+│   │   ├── _layout.tsx           # Layout das abas + drawer
+│   │   ├── index.tsx             # Home / APOD
+│   │   ├── chat.tsx              # Chat IA (RAG)
+│   │   ├── community.tsx         # Feed da comunidade
+│   │   ├── create-post.tsx       # Criar post
+│   │   ├── exoplanet.tsx         # Catálogo de exoplanetas
+│   │   ├── gallerytab.tsx        # Aba galeria da comunidade
+│   │   ├── hubble.tsx            # Dataset científico
+│   │   ├── LoginScreen.tsx       # Tela de login
+│   │   ├── profile.tsx           # Diário de bordo / Perfil
+│   │   ├── sky.tsx               # Guia de constelações
+│   │   └── stars.tsx             # Estrelas próximas (Gaia)
+│   ├── constellation/[id].tsx    # Detalhe de constelação
+│   ├── post/[id].tsx             # Detalhe de post
+│   ├── wiki/[id].tsx             # Relatório de exoplaneta
+│   ├── styles/                   # Estilos separados
+│   ├── _layout.tsx               # Layout raiz (Stack)
+│   ├── +html.tsx                 # Config HTML (web)
+│   └── +not-found.tsx            # Tela 404
+├── components/                   # Componentes reutilizáveis
+├── services/                     # Camada de serviços (APIs)
+├── constants/                    # Paleta de cores light/dark
+├── screen/                       # Telas independentes
+├── assets/                       # Imagens e fontes
+├── astreu-backend/               # Backend NestJS
+│   ├── src/                      # Código fonte
+│   ├── uploads/                  # Arquivos estáticos
+│   ├── seed.js                   # Script de seed
+│   ├── chat_history.json         # Histórico de chat
+│   └── .env                      # Variáveis de ambiente
+├── package.json
+├── app.json
+└── tsconfig.json
+</code></pre>
+
+<hr>
+
+<h2 id="sec5">5. Frontend — React Native / Expo</h2>
+<h3 id="sec51">5.1 Configurações do Projeto</h3>
+<h4><code>package.json</code></h4>
+<table>
+<thead><tr><th>Script</th><th>Comando</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td><code>start</code></td><td><code>expo start</code></td><td>Inicia o servidor Metro</td></tr>
+<tr><td><code>android</code></td><td><code>expo start --android</code></td><td>Executa no Android</td></tr>
+<tr><td><code>ios</code></td><td><code>expo start --ios</code></td><td>Executa no iOS</td></tr>
+<tr><td><code>web</code></td><td><code>expo start --web</code></td><td>Executa versão web</td></tr>
+</tbody>
+</table>
+
+<h4><code>app.json</code></h4>
+<table>
+<thead><tr><th>Campo</th><th>Valor</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td><code>name</code></td><td><code>"Astreu"</code></td><td>Nome do app</td></tr>
+<tr><td><code>slug</code></td><td><code>"Astreu"</code></td><td>Identificador URL</td></tr>
+<tr><td><code>version</code></td><td><code>"1.0.0"</code></td><td>Versão</td></tr>
+<tr><td><code>orientation</code></td><td><code>"portrait"</code></td><td>Orientação fixa</td></tr>
+<tr><td><code>scheme</code></td><td><code>"astreu"</code></td><td>Deep linking scheme</td></tr>
+<tr><td><code>newArchEnabled</code></td><td><code>true</code></td><td>Nova Arquitetura RN</td></tr>
+<tr><td><code>experiments.typedRoutes</code></td><td><code>true</code></td><td>Rotas tipadas</td></tr>
+</tbody>
+</table>
+
+<h4><code>tsconfig.json</code></h4>
+<ul>
+<li>Extende <code>expo/tsconfig.base</code></li>
+<li><code>strict: true</code></li>
+<li>Path alias: <code>@/*</code> → <code>./*</code></li>
+</ul>
+
+<h3 id="sec52">5.2 Navegação e Rotas</h3>
+
+<div class="diagram-box">
+  <div class="diagram-node">_layout.tsx (Stack)</div>
+  <div class="diagram-arrow">→</div>
+  <div class="diagram-group" style="display:inline-block; text-align:left; vertical-align:middle;">
+    <div class="diagram-group-title">(tabs)/_layout.tsx</div>
+    <ul>
+      <li>index.tsx (Home)</li>
+      <li>community.tsx</li>
+      <li>sky.tsx</li>
+      <li>hubble.tsx</li>
+      <li>chat.tsx</li>
+      <li style="color:#888;">Outras rotas (Login, Perfil, etc)</li>
+    </ul>
+  </div>
+  <div class="diagram-arrow">→</div>
+  <div class="diagram-group" style="display:inline-block; text-align:left; vertical-align:middle;">
+    <div class="diagram-group-title">Rotas Dinâmicas</div>
+    <ul>
+      <li>constellation/[id].tsx</li>
+      <li>post/[id].tsx</li>
+      <li>wiki/[id].tsx</li>
+    </ul>
+  </div>
+</div>
+
+<h4>Abas Visíveis (Bottom Tab Bar)</h4>
+<table>
+<thead><tr><th>Aba</th><th>Ícone</th><th>Arquivo</th><th>Rota</th></tr></thead>
+<tbody>
+<tr><td>Foto do Dia</td><td>🔭 Telescope</td><td><code>index.tsx</code></td><td><code>/</code></td></tr>
+<tr><td>Espaço</td><td>👤 Astronaut</td><td><code>community.tsx</code></td><td><code>/community</code></td></tr>
+<tr><td>O Céu</td><td>✦ Star</td><td><code>sky.tsx</code></td><td><code>/sky</code></td></tr>
+<tr><td>Hubble</td><td>⊞ Grid</td><td><code>hubble.tsx</code></td><td><code>/hubble</code></td></tr>
+<tr><td>Astreu AI</td><td>🤖 Robot</td><td><code>chat.tsx</code></td><td><code>/chat</code></td></tr>
+</tbody>
+</table>
+
+<h4>Layout das Abas — <code>(tabs)/_layout.tsx</code></h4>
+<ul>
+<li>Gerencia menu drawer lateral (perfil do usuário)</li>
+<li>Lê dados do usuário do <code>AsyncStorage</code> (<code>@astreuhub_user</code>)</li>
+<li>Renderiza <code>ProfileModal</code> para opções de logout</li>
+<li>Tema escuro padrão (<code>#0B0D17</code>)</li>
+</ul>
+
+<h3 id="sec53">5.3 Telas (Screens)</h3>
+<h4>5.3.1 Home / Foto do Dia — <code>index.tsx</code></h4>
+<table>
+<tbody>
+<tr><td><strong>Propósito</strong></td><td>Exibe a Foto Astronômica do Dia (APOD) da NASA</td></tr>
+<tr><td><strong>API</strong></td><td><code>getApod()</code> → NASA APOD</td></tr>
+<tr><td><strong>Estado</strong></td><td><code>data</code>, <code>loading</code>, <code>modalVisible</code>, <code>dailyFact</code></td></tr>
+<tr><td><strong>Features</strong></td><td>Carrossel de curiosidades, modal deslizante com explicação científica, ícone de perfil</td></tr>
+</tbody>
+</table>
+
+<h4>5.3.2 Chat IA — <code>chat.tsx</code></h4>
+<table>
+<tbody>
+<tr><td><strong>Propósito</strong></td><td>Interface de chat com o assistente Astreu AI (RAG)</td></tr>
+<tr><td><strong>Biblioteca</strong></td><td><code>react-native-gifted-chat</code></td></tr>
+<tr><td><strong>Estado</strong></td><td><code>messages</code>, <code>isTyping</code>, <code>isDrawerOpen</code>, <code>currentSessionId</code>, <code>sessions</code>, <code>userId</code></td></tr>
+<tr><td><strong>APIs Backend</strong></td><td><code>POST /ai/ask</code>, <code>GET /ai/sessions</code>, <code>GET /ai/history/:sessionId</code></td></tr>
+<tr><td><strong>Features</strong></td><td>Drawer lateral com histórico, indicador de digitação, múltiplas sessões</td></tr>
+</tbody>
+</table>
+
+<h4>5.3.3 Comunidade — <code>community.tsx</code></h4>
+<table>
+<tbody>
+<tr><td><strong>Propósito</strong></td><td>Feed social com posts da comunidade</td></tr>
+<tr><td><strong>Estado</strong></td><td><code>userData</code>, <code>posts</code>, <code>loading</code>, <code>activeTab</code></td></tr>
+<tr><td><strong>API</strong></td><td><code>GET /posts</code></td></tr>
+<tr><td><strong>Abas</strong></td><td>"ESTUDOS" (artigos com PDF) e "GALERIA" (fotos)</td></tr>
+<tr><td><strong>Navegação</strong></td><td>→ <code>/create-post</code> (criar), → <code>/post/[id]</code> (detalhe)</td></tr>
+</tbody>
+</table>
+
+<h4>5.3.4 Criar Post — <code>create-post.tsx</code></h4>
+<table>
+<tbody>
+<tr><td><strong>Propósito</strong></td><td>Formulário de criação de posts</td></tr>
+<tr><td><strong>Estado</strong></td><td><code>tipo</code>, <code>titulo</code>, <code>conteudo</code>, <code>imageUri</code>, <code>pdfUri</code>, <code>pdfName</code>, <code>loading</code>, <code>uploadProgress</code>, <code>userId</code></td></tr>
+<tr><td><strong>API</strong></td><td><code>POST /posts</code> (FormData com upload progress)</td></tr>
+<tr><td><strong>Features</strong></td><td>Tipo de post, câmera/galeria, upload de PDF, barra de progresso</td></tr>
+</tbody>
+</table>
+
+<h4>5.3.5 Exoplanetas — <code>exoplanet.tsx</code></h4>
+<table>
+<tbody>
+<tr><td><strong>Propósito</strong></td><td>Catálogo dos 50 exoplanetas mais recentes</td></tr>
+<tr><td><strong>API</strong></td><td><code>getExoplanets()</code> → Caltech Exoplanet Archive (TAP/ADQL)</td></tr>
+<tr><td><strong>Features</strong></td><td>Gradientes de cor, cards com distância e indicador de habitabilidade</td></tr>
+<tr><td><strong>Navegação</strong></td><td>→ <code>/wiki/[id]</code> (relatório de missão)</td></tr>
+</tbody>
+</table>
+
+<h4>5.3.6 Estrelas Próximas — <code>stars.tsx</code></h4>
+<table>
+<tbody>
+<tr><td><strong>Propósito</strong></td><td>Lista de estrelas da vizinhança solar</td></tr>
+<tr><td><strong>API</strong></td><td><code>getStarNeighbors()</code> → ESA Gaia DR3 (TAP)</td></tr>
+<tr><td><strong>Features</strong></td><td>Magnitude, distância, constelação, botão "FOTO REAL" que abre Aladin Lite</td></tr>
+</tbody>
+</table>
+
+<h4>5.3.7 O Céu — <code>sky.tsx</code></h4>
+<table>
+<tbody>
+<tr><td><strong>Propósito</strong></td><td>Guia do céu noturno — lista de constelações</td></tr>
+<tr><td><strong>Fonte</strong></td><td><code>getConstellationsData()</code> (dados locais)</td></tr>
+<tr><td><strong>Navegação</strong></td><td>→ <code>/constellation/[id]</code> (detalhe da constelação)</td></tr>
+<tr><td><strong>Features</strong></td><td>Cards com resumo, subtítulo poético, modal informativo</td></tr>
+</tbody>
+</table>
+
+<h4>5.3.8 Dataset Científico — <code>hubble.tsx</code></h4>
+<table>
+<tbody>
+<tr><td><strong>Propósito</strong></td><td>Galeria de astrofotografia por categorias</td></tr>
+<tr><td><strong>API</strong></td><td><code>GET /gallery/:category</code></td></tr>
+<tr><td><strong>Categorias</strong></td><td>Planetas, Espaço, Galáxias, Nebulosas, Estrelas, Constelações</td></tr>
+<tr><td><strong>Features</strong></td><td>Grid 2 colunas, favoritos locais, modal fullscreen, info do dataset</td></tr>
+</tbody>
+</table>
+
+<h4>5.3.9 Perfil / Diário de Bordo — <code>profile.tsx</code></h4>
+<table>
+<tbody>
+<tr><td><strong>Propósito</strong></td><td>Painel pessoal "Comando Central" com diário astronômico</td></tr>
+<tr><td><strong>APIs</strong></td><td><code>GET/POST /diario</code>, <code>GET/POST/PATCH/DELETE /diario/metas</code></td></tr>
+<tr><td><strong>Features</strong></td><td>Calendário interativo, observações com foto, metas, viewer de fotos</td></tr>
+</tbody>
+</table>
+
+<h4>5.3.10 Login — <code>LoginScreen.tsx</code></h4>
+<table>
+<tbody>
+<tr><td><strong>Propósito</strong></td><td>Autenticação do usuário</td></tr>
+<tr><td><strong>API</strong></td><td><code>POST /users/login</code></td></tr>
+<tr><td><strong>Fluxo</strong></td><td>Email + senha → valida → AsyncStorage → redireciona</td></tr>
+</tbody>
+</table>
+
+<h4>5.3.11 Rotas Dinâmicas</h4>
+<table>
+<thead><tr><th>Rota</th><th>Arquivo</th><th>Propósito</th></tr></thead>
+<tbody>
+<tr><td><code>/constellation/[id]</code></td><td><code>constellation/[id].tsx</code></td><td>Detalhe de constelação com imagem hero, estrelas e história</td></tr>
+<tr><td><code>/post/[id]</code></td><td><code>post/[id].tsx</code></td><td>Detalhe de post com imagem, PDF viewer e comentários</td></tr>
+<tr><td><code>/wiki/[id]</code></td><td><code>wiki/[id].tsx</code></td><td>Relatório de exoplaneta com esfera 3D e análise de habitabilidade</td></tr>
+</tbody>
+</table>
+
+<h3 id="sec54">5.4 Componentes Reutilizáveis</h3>
+<table>
+<thead><tr><th>Componente</th><th>Arquivo</th><th>Propósito</th></tr></thead>
+<tbody>
+<tr><td><code>AsteroidCard</code></td><td><code>AsteroidCard.tsx</code></td><td>Card 3D animado para dados de asteroides</td></tr>
+<tr><td><code>CustomHeader</code></td><td><code>CustomHeader.tsx</code></td><td>Botão de perfil no cabeçalho</td></tr>
+<tr><td><code>ExternalLink</code></td><td><code>ExternalLink.tsx</code></td><td>Link que abre no browser nativo</td></tr>
+<tr><td><code>FloatingHeader</code></td><td><code>FloatingHeader.tsx</code></td><td>Cabeçalho flutuante com safe area insets</td></tr>
+<tr><td><code>Loading</code></td><td><code>Loading.tsx</code></td><td>Indicador de carregamento fullscreen</td></tr>
+<tr><td><code>ProfileModal</code></td><td><code>ProfileModal.tsx</code></td><td>Modal de perfil com opções e logout</td></tr>
+<tr><td><code>MonoText</code></td><td><code>StyledText.tsx</code></td><td>Texto com fonte monoespacada</td></tr>
+<tr><td><code>Text</code> / <code>View</code></td><td><code>Themed.tsx</code></td><td>Wrappers com suporte a tema claro/escuro</td></tr>
+</tbody>
+</table>
+
+<h3 id="sec55">5.5 Camada de Serviços</h3>
+<h4><code>services/api.ts</code></h4>
+<table>
+<thead><tr><th>Função</th><th>API</th><th>Retorno</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td><code>getApod()</code></td><td>NASA APOD</td><td><code>ApodResponse</code></td><td>Foto astronômica do dia</td></tr>
+<tr><td><code>getAsteroids()</code></td><td>NASA NeoWs</td><td><code>Asteroid[]</code></td><td>Asteroides próximos da Terra</td></tr>
+<tr><td><code>getExoplanets()</code></td><td>Caltech TAP</td><td><code>Exoplanet[]</code></td><td>50 exoplanetas mais recentes</td></tr>
+<tr><td><code>getStarNeighbors()</code></td><td>ESA Gaia DR3</td><td><code>StarNeighbor[]</code></td><td>Estrelas da vizinhança solar</td></tr>
+</tbody>
+</table>
+
+<h4><code>services/astronomy.ts</code></h4>
+<table>
+<thead><tr><th>Função</th><th>Retorno</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td><code>getVisibleStars(latitude)</code></td><td><code>Star[]</code></td><td>Estrelas visíveis por latitude</td></tr>
+<tr><td><code>getConstellationsData()</code></td><td><code>Constellation[]</code></td><td>Catálogo completo de constelações</td></tr>
+</tbody>
+</table>
+
+<h4><code>services/hubble.ts</code></h4>
+<table>
+<thead><tr><th>Função</th><th>API</th><th>Retorno</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td><code>getHubbleGallery()</code></td><td>NASA Images API</td><td><code>HubbleImage[]</code></td><td>Imagens do telescópio Hubble</td></tr>
+</tbody>
+</table>
+
+<h3 id="sec56">5.6 Constantes e Temas</h3>
+<pre><code>// Paleta de cores
+light: { text: '#000', background: '#fff', tint: '#2f95dc', ... }
+dark:  { text: '#fff', background: '#000', tint: '#fff', ... }
+</code></pre>
+
+<hr>
+
+<h2 id="sec6">6. Backend — NestJS</h2>
+<h3 id="sec61">6.1 Configuração e Entry Point</h3>
+<pre><code>// main.ts
+const app = await NestFactory.create&lt;NestExpressApplication&gt;(AppModule);
+app.enableCors();
+app.useStaticAssets(join(process.cwd(), 'uploads'), { prefix: '/uploads/' });
+await app.listen(3000);
+</code></pre>
+
+<h3 id="sec62">6.2 Módulo de IA (RAG)</h3>
+<div class="alert alert-important"><strong>Importante</strong> Este é o módulo central do TCC — implementa o pipeline RAG completo.</div>
+<h4>Endpoints</h4>
+<table>
+<thead><tr><th>Método</th><th>Rota</th><th>Body/Params</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td><code>POST</code></td><td><code>/ai/seed</code></td><td>—</td><td>Inicia ingestão de PDFs no ChromaDB</td></tr>
+<tr><td><code>POST</code></td><td><code>/ai/ask</code></td><td><code>{ query, sessionId?, userId }</code></td><td>Envia pergunta ao RAG</td></tr>
+<tr><td><code>GET</code></td><td><code>/ai/sessions</code></td><td><code>?userId=</code></td><td>Lista sessões do usuário</td></tr>
+<tr><td><code>GET</code></td><td><code>/ai/history/:sessionId</code></td><td><code>?userId=</code></td><td>Histórico de mensagens da sessão</td></tr>
+</tbody>
+</table>
+
+<h3 id="sec63">6.3 Módulo de Usuários</h3>
+<table>
+<thead><tr><th>Campo</th><th>Tipo</th><th>Restrições</th></tr></thead>
+<tbody>
+<tr><td><code>id</code></td><td><code>number</code></td><td>PrimaryGeneratedColumn</td></tr>
+<tr><td><code>nome</code></td><td><code>string</code></td><td>Column</td></tr>
+<tr><td><code>email</code></td><td><code>string</code></td><td>Column, unique</td></tr>
+<tr><td><code>senha</code></td><td><code>string</code></td><td>Column (hash bcrypt)</td></tr>
+</tbody>
+</table>
+
+<h3 id="sec64">6.4 Módulo de Autenticação</h3>
+<div class="alert alert-warning"><strong>Aviso</strong> Atualmente não utiliza JWT. O login retorna o objeto do usuário diretamente, sem token de sessão.</div>
+<table>
+<thead><tr><th>Método</th><th>Rota</th><th>Body</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td><code>POST</code></td><td><code>/auth/login</code></td><td><code>{ email, senha }</code></td><td>Autenticação via bcrypt.compare</td></tr>
+</tbody>
+</table>
+
+<h3 id="sec65">6.5 Módulo de Posts (Comunidade)</h3>
+<table>
+<thead><tr><th>Campo</th><th>Tipo</th><th>Restrições</th></tr></thead>
+<tbody>
+<tr><td><code>id</code></td><td><code>number</code></td><td>PrimaryGeneratedColumn</td></tr>
+<tr><td><code>tipo</code></td><td><code>enum</code></td><td><code>'article'</code> | <code>'photo'</code></td></tr>
+<tr><td><code>titulo</code></td><td><code>string</code></td><td>Column</td></tr>
+<tr><td><code>url_midia</code></td><td><code>string</code></td><td>Column (filename da imagem)</td></tr>
+<tr><td><code>url_pdf</code></td><td><code>string</code></td><td>Column, nullable</td></tr>
+<tr><td><code>conteudo</code></td><td><code>string</code></td><td>Column, text</td></tr>
+<tr><td><code>usuario</code></td><td><code>User</code></td><td>ManyToOne</td></tr>
+</tbody>
+</table>
+
+<h3 id="sec66">6.6 Módulo de Diário de Bordo</h3>
+<table>
+<thead><tr><th>Método</th><th>Rota</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td><code>POST</code></td><td><code>/diario</code></td><td>Cria entrada no diário (com fotos em Base64)</td></tr>
+<tr><td><code>GET</code></td><td><code>/diario</code></td><td>Lista todas as entradas (com fotos e autor)</td></tr>
+<tr><td><code>GET</code></td><td><code>/diario/:id</code></td><td>Busca entrada por ID</td></tr>
+<tr><td><code>POST</code></td><td><code>/diario/metas</code></td><td>Cria nova meta de exploração</td></tr>
+<tr><td><code>GET</code></td><td><code>/diario/metas/:usuarioId</code></td><td>Lista metas do usuário</td></tr>
+<tr><td><code>PATCH</code></td><td><code>/diario/metas/:id</code></td><td>Atualiza status da meta</td></tr>
+<tr><td><code>DELETE</code></td><td><code>/diario/metas/:id</code></td><td>Remove meta</td></tr>
+</tbody>
+</table>
+
+<h3 id="sec67">6.7 Módulo de Galeria (Dataset)</h3>
+<table>
+<thead><tr><th>Método</th><th>Rota</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td><code>GET</code></td><td><code>/gallery/:category</code></td><td>Lista imagens da categoria do dataset</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2 id="sec7">7. Pipeline RAG — Detalhamento Técnico</h2>
+
+<div class="diagram-box">
+  <div class="diagram-group">
+    <div class="diagram-group-title">Fase de Ingestão (Offline)</div>
+    <div class="diagram-node">📄 PDFs</div><span class="diagram-arrow">→</span>
+    <div class="diagram-node">📖 Loader</div><span class="diagram-arrow">→</span>
+    <div class="diagram-node">✂️ Splitter</div><span class="diagram-arrow">→</span>
+    <div class="diagram-node">🧮 Embedding</div><span class="diagram-arrow">→</span>
+    <div class="diagram-node">🗄️ ChromaDB</div>
+  </div>
+  <div class="diagram-group">
+    <div class="diagram-group-title">Fase de Consulta (Online)</div>
+    <div class="diagram-node">❓ Pergunta</div><span class="diagram-arrow">→</span>
+    <div class="diagram-node">🔄 Tradução</div><span class="diagram-arrow">→</span>
+    <div class="diagram-node">🧮 Embedding</div><span class="diagram-arrow">→</span>
+    <div class="diagram-node">🔎 Busca (ChromaDB)</div><span class="diagram-arrow">→</span>
+    <div class="diagram-node">📋 Contexto</div><span class="diagram-arrow">→</span>
+    <div class="diagram-node">🧠 Llama 3</div><span class="diagram-arrow">→</span>
+    <div class="diagram-node">✅ Resposta</div>
+  </div>
+</div>
+
+<table>
+<thead><tr><th>Parâmetro</th><th>Valor</th><th>Descrição</th></tr></thead>
+<tbody>
+<tr><td><code>chunkSize</code></td><td>400</td><td>Tamanho máximo de cada chunk</td></tr>
+<tr><td><code>chunkOverlap</code></td><td>80</td><td>Sobreposição entre chunks</td></tr>
+<tr><td><code>topK</code></td><td>4</td><td>Número de chunks retornados</td></tr>
+<tr><td><code>temperature</code></td><td>0</td><td>Determinismo máximo</td></tr>
+<tr><td><code>maxHistory</code></td><td>6 turnos</td><td>Contexto histórico</td></tr>
+<tr><td><code>collection</code></td><td><code>astreu-local</code></td><td>Nome da collection no ChromaDB</td></tr>
+<tr><td><code>model (LLM)</code></td><td><code>llama3</code></td><td>Modelo de geração</td></tr>
+<tr><td><code>model (embed)</code></td><td><code>mxbai-embed-large</code></td><td>Modelo de embeddings</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2 id="sec8">8. Banco de Dados</h2>
+
+<div class="diagram-box" style="text-align:center;">
+  <div class="diagram-er-table">
+    <div class="diagram-er-header">USUARIOS</div>
+    <div class="diagram-er-row"><span class="diagram-er-pk">PK int id</span></div>
+    <div class="diagram-er-row">varchar nome</div>
+    <div class="diagram-er-row">varchar email (UK)</div>
+    <div class="diagram-er-row">varchar senha</div>
+  </div>
+
+  <div class="diagram-er-table">
+    <div class="diagram-er-header">POSTS_COMUNIDADE</div>
+    <div class="diagram-er-row"><span class="diagram-er-pk">PK int id</span></div>
+    <div class="diagram-er-row">enum tipo</div>
+    <div class="diagram-er-row">varchar titulo</div>
+    <div class="diagram-er-row">varchar url_midia</div>
+    <div class="diagram-er-row">varchar url_pdf</div>
+    <div class="diagram-er-row">text conteudo</div>
+    <div class="diagram-er-row"><span class="diagram-er-fk">FK int usuario_id</span></div>
+  </div>
+
+  <div class="diagram-er-table">
+    <div class="diagram-er-header">DIARIO_BORDO</div>
+    <div class="diagram-er-row"><span class="diagram-er-pk">PK int id</span></div>
+    <div class="diagram-er-row">varchar titulo_observacao</div>
+    <div class="diagram-er-row">text relato</div>
+    <div class="diagram-er-row">datetime data_observacao</div>
+    <div class="diagram-er-row"><span class="diagram-er-fk">FK int usuario_id</span></div>
+  </div>
+
+  <div class="diagram-er-table">
+    <div class="diagram-er-header">METAS_EXPLORACAO</div>
+    <div class="diagram-er-row"><span class="diagram-er-pk">PK int id</span></div>
+    <div class="diagram-er-row">varchar titulo</div>
+    <div class="diagram-er-row">enum status</div>
+    <div class="diagram-er-row"><span class="diagram-er-fk">FK int usuario_id</span></div>
+  </div>
+
+  <div class="diagram-er-table">
+    <div class="diagram-er-header">FOTOS_DIARIO</div>
+    <div class="diagram-er-row"><span class="diagram-er-pk">PK int id</span></div>
+    <div class="diagram-er-row">longtext url_foto</div>
+    <div class="diagram-er-row"><span class="diagram-er-fk">FK int diario_id</span></div>
+  </div>
+</div>
+
+<hr>
+
+<h2 id="sec9">9. APIs Externas Integradas</h2>
+<table>
+<thead><tr><th>API</th><th>Provedor</th><th>Endpoint</th><th>Dados</th></tr></thead>
+<tbody>
+<tr><td><strong>APOD</strong></td><td>NASA</td><td><code>https://api.nasa.gov/planetary/apod</code></td><td>Foto astronômica do dia</td></tr>
+<tr><td><strong>NeoWs</strong></td><td>NASA</td><td><code>https://api.nasa.gov/neo/rest/v1/feed</code></td><td>Asteroides Near-Earth</td></tr>
+<tr><td><strong>Exoplanet Archive</strong></td><td>Caltech/IPAC</td><td><code>https://exoplanetarchive.ipac.caltech.edu/TAP/sync</code></td><td>Exoplanetas</td></tr>
+<tr><td><strong>Gaia DR3</strong></td><td>ESA</td><td><code>https://gea.esac.esa.int/tap-server/tap/sync</code></td><td>Estrelas próximas</td></tr>
+<tr><td><strong>Images API</strong></td><td>NASA</td><td><code>https://images-api.nasa.gov/search</code></td><td>Imagens Hubble/JWST</td></tr>
+<tr><td><strong>arXiv</strong></td><td>Cornell</td><td><code>http://export.arxiv.org/api/query</code></td><td>Artigos (PDFs RAG)</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2 id="sec10">10. Referência de Endpoints da API</h2>
+<p>Base URL: <code>http://localhost:3000</code></p>
+<p>Verifique o módulo referente no código-fonte principal para listagem completa.</p>
+
+<hr>
+
+<h2 id="sec11">11. Variáveis de Ambiente</h2>
+<table>
+<thead><tr><th>Variável</th><th>Propósito</th><th>Observação</th></tr></thead>
+<tbody>
+<tr><td><code>GEMINI_API_KEY</code></td><td>Chave Google Gemini</td><td>Não utilizada atualmente</td></tr>
+<tr><td><code>PINECONE_API_KEY</code></td><td>Chave Pinecone</td><td>ChromaDB local é usado</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2 id="sec12">12. Guia de Instalação e Execução</h2>
+<pre><code># Instalar e executar Ollama
+ollama pull llama3
+ollama pull mxbai-embed-large
+
+# Instalar ChromaDB
+pip install chromadb
+chroma run --host 0.0.0.0 --port 8000
+
+# Executar Backend NestJS
+cd astreu-backend
+npm install
+npm run start:dev
+
+# Executar Frontend Expo
+cd ..
+npm install
+npx expo start
+</code></pre>
+
+<hr>
+
+<h2 id="sec13">13. Seed de Dados (arXiv)</h2>
+<p>O script <code>seed.js</code> baixa PDFs do arXiv e organiza nas pastas por categoria, mantendo o repositório preparado para a ingestão via RAG.</p>
+
+<div class="alert alert-tip"><strong>Dica</strong> Esta documentação cobre 100% dos arquivos do projeto Astreu Hub.</div>
+
+</div>
+</body>
+</html>

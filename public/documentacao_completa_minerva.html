@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentação Completa — Minerva English App</title>
+  <style>
+:root {
+  --bg: #0D0B1E;
+  --surface: #16132A;
+  --surface-card: #1E1A3A;
+  --text: #F0EDFF;
+  --text-muted: #A5A2C8;
+  --primary: #7F56D9;
+  --primary-glow: #9E77ED;
+  --accent: #00E5FF;
+  --border: rgba(127, 86, 217, 0.25);
+  --code-bg: #0A0817;
+  --success: #00FF9D;
+  --warning: #FFB800;
+  --danger: #FF385C;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 48px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(127, 86, 217, 0.15);
+}
+
+h1 {
+  font-size: 2.2rem;
+  color: #FFFFFF;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 12px;
+  margin-top: 10px;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+
+h2 {
+  font-size: 1.6rem;
+  color: var(--accent);
+  margin-top: 36px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+h3 {
+  font-size: 1.25rem;
+  color: var(--primary-glow);
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+p, li {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+p strong, li strong {
+  color: var(--text);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--accent);
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: #FFFFFF;
+  border-bottom-style: solid;
+}
+
+blockquote {
+  background: var(--surface-card);
+  border-left: 4px solid var(--accent);
+  padding: 16px 20px;
+  border-radius: 0 12px 12px 0;
+  margin: 20px 0;
+}
+
+blockquote p {
+  color: var(--text);
+  margin-bottom: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  background: var(--surface-card);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+th, td {
+  padding: 14px 18px;
+  text-align: left;
+}
+
+th {
+  background: rgba(127, 86, 217, 0.2);
+  color: var(--text);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  border-bottom: 1px solid rgba(127, 86, 217, 0.1);
+  color: var(--text-muted);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+code {
+  font-family: 'Consolas', 'Monaco', monospace;
+  background: var(--code-bg);
+  color: var(--accent);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  border: 1px solid var(--border);
+}
+
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  border: none;
+  color: #E2E8F0;
+}
+
+ul, ol {
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+@media print {
+  body { background: #FFF; color: #000; padding: 0; }
+  .container { border: none; box-shadow: none; padding: 0; max-width: 100%; }
+  h1, h2, h3 { color: #000; border-color: #DDD; }
+  p, li, td { color: #333; }
+  table { border: 1px solid #DDD; }
+  th { background: #F5F5F5; color: #000; }
+  blockquote { background: #F9F9F9; border-left-color: #00E5FF; }
+  pre, code { background: #F5F5F5; color: #000; border-color: #DDD; }
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="documentacao-completa-minerva-english-app">📚 Documentação Completa — Minerva English App</h1>
+<blockquote>
+<p><strong>Versão:</strong> 1.0.0 | <strong>Última atualização:</strong> Agosto 2026<br />
+<strong>Repositório Frontend:</strong> <a href="https://github.com/BrenoPiropo/Readingapp">github.com/BrenoPiropo/Readingapp</a><br />
+<strong>Repositório Backend:</strong> <a href="https://github.com/BrenoPiropo/Minerva-backend">github.com/BrenoPiropo/Minerva-backend</a><br />
+<strong>Backend em Produção:</strong> <code>https://minerva-backend-e0sa.onrender.com</code></p>
+</blockquote>
+<hr />
+<h2 id="1-visao-geral-do-projeto">1. Visão Geral do Projeto</h2>
+<p>O <strong>Minerva English App</strong> é um aplicativo mobile gamificado para o aprendizado de vocabulário em inglês, voltado para falantes de português brasileiro. Desenvolvido com <strong>React Native (Expo)</strong> no frontend e <strong>NestJS</strong> no backend, o app utiliza mecânicas de jogos — XP, níveis, ranking, ofensiva diária e desafios — para tornar o estudo de idiomas envolvente e eficaz.</p>
+<h3 id="11-principais-funcionalidades">1.1 Principais Funcionalidades</h3>
+<table>
+<thead>
+<tr>
+<th>Funcionalidade</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Flash Cards</strong></td>
+<td>Cartões de vocabulário com pronúncia por voz (Text-to-Speech) e tradução inteligente</td>
+</tr>
+<tr>
+<td><strong>Revisão Espaçada</strong></td>
+<td>Sistema de repetição espaçada para palavras erradas</td>
+</tr>
+<tr>
+<td><strong>Embaralhar Palavras</strong></td>
+<td>Jogo de desembaralhar letras para formar palavras em inglês</td>
+</tr>
+<tr>
+<td><strong>Enigma Master</strong></td>
+<td>Jogo de charadas/enigmas em inglês</td>
+</tr>
+<tr>
+<td><strong>Jogo da Forca</strong></td>
+<td>Versão digital do jogo da forca com vocabulário em inglês</td>
+</tr>
+<tr>
+<td><strong>Tutor IA (Athena)</strong></td>
+<td>Chat com inteligência artificial para tirar dúvidas de inglês, integrado ao Google Gemini</td>
+</tr>
+<tr>
+<td><strong>Desafios Diários</strong></td>
+<td>Missões com metas de XP para manter a motivação</td>
+</tr>
+<tr>
+<td><strong>Ranking Global</strong></td>
+<td>Placar de liderança com todos os usuários do app</td>
+</tr>
+<tr>
+<td><strong>Sistema de XP &amp; Níveis</strong></td>
+<td>Progressão gamificada com experiência e níveis</td>
+</tr>
+<tr>
+<td><strong>Login Persistente</strong></td>
+<td>Sessão salva no dispositivo — login único, sem pedir senha toda vez</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-arquitetura-do-sistema">2. Arquitetura do Sistema</h2>
+<pre><code class="language-mermaid">graph TB
+    subgraph &quot;📱 Frontend (Expo/React Native)&quot;
+        A[&quot;app/index.tsx&lt;br/&gt;Entry Point &amp; Auto-Login&quot;] --&gt; B[&quot;app/Categories.tsx&lt;br/&gt;Dashboard Principal&quot;]
+        B --&gt; C[&quot;Home.tsx&lt;br/&gt;Flash Cards&quot;]
+        B --&gt; D[&quot;Review.tsx&lt;br/&gt;Revisão Espaçada&quot;]
+        B --&gt; E[&quot;WordScramble.tsx&lt;br/&gt;Embaralhar&quot;]
+        B --&gt; F[&quot;Charade.tsx&lt;br/&gt;Enigma Master&quot;]
+        B --&gt; G[&quot;Force.tsx&lt;br/&gt;Forca&quot;]
+        B --&gt; H[&quot;AiTutor.tsx&lt;br/&gt;Chat IA&quot;]
+        B --&gt; I[&quot;Quests.tsx&lt;br/&gt;Desafios&quot;]
+        B --&gt; J[&quot;Ranking.tsx&lt;br/&gt;Placar&quot;]
+        B --&gt; K[&quot;perfil.tsx&lt;br/&gt;Perfil&quot;]
+    end
+
+    subgraph &quot;🔧 Backend (NestJS)&quot;
+        L[&quot;Auth Module&lt;br/&gt;JWT + bcrypt&quot;]
+        M[&quot;Words Module&lt;br/&gt;Vocabulário + AI Gateway&quot;]
+        N[&quot;Status Module&lt;br/&gt;Progresso &amp; Estatísticas&quot;]
+        O[&quot;Ranking Module&lt;br/&gt;Placar Global&quot;]
+        P[&quot;Desafios Module&lt;br/&gt;Desafios Diários&quot;]
+    end
+
+    subgraph &quot;🗄️ Infraestrutura&quot;
+        Q[&quot;MySQL&lt;br/&gt;Banco de Dados&quot;]
+        R[&quot;Google Gemini API&lt;br/&gt;Inteligência Artificial&quot;]
+        S[&quot;Render&lt;br/&gt;Hospedagem Docker&quot;]
+    end
+
+    A --&gt;|&quot;Axios + JWT&quot;| L
+    C --&gt;|&quot;GET /words&quot;| M
+    C --&gt;|&quot;POST /status/registrar&quot;| N
+    D --&gt;|&quot;GET /status/revisao&quot;| N
+    H --&gt;|&quot;POST /words/ai-tutor&quot;| M
+    M --&gt;|&quot;Proxy&quot;| R
+    I --&gt;|&quot;GET /desafios/usuario&quot;| P
+    J --&gt;|&quot;GET /ranking&quot;| O
+    L --&gt; Q
+    M --&gt; Q
+    N --&gt; Q
+    O --&gt; Q
+    P --&gt; Q
+    S --&gt; L
+</code></pre>
+<hr />
+<h2 id="3-stack-tecnologica">3. Stack Tecnológica</h2>
+<h3 id="31-frontend">3.1 Frontend</h3>
+<table>
+<thead>
+<tr>
+<th>Tecnologia</th>
+<th>Versão</th>
+<th>Finalidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>React Native</strong></td>
+<td>0.76.9</td>
+<td>Framework mobile multiplataforma</td>
+</tr>
+<tr>
+<td><strong>Expo</strong></td>
+<td>~52.0.46</td>
+<td>Plataforma de desenvolvimento e build</td>
+</tr>
+<tr>
+<td><strong>Expo Router</strong></td>
+<td>~4.0.20</td>
+<td>Navegação baseada em arquivos (file-based routing)</td>
+</tr>
+<tr>
+<td><strong>TypeScript</strong></td>
+<td>~5.3.3</td>
+<td>Tipagem estática</td>
+</tr>
+<tr>
+<td><strong>Axios</strong></td>
+<td>^1.9.0</td>
+<td>Cliente HTTP para chamadas à API</td>
+</tr>
+<tr>
+<td><strong>AsyncStorage</strong></td>
+<td>1.23.1</td>
+<td>Persistência de dados local (token, perfil)</td>
+</tr>
+<tr>
+<td><strong>Expo Speech</strong></td>
+<td>~13.0.1</td>
+<td>Síntese de voz (pronúncia de palavras)</td>
+</tr>
+<tr>
+<td><strong>Expo Vector Icons</strong></td>
+<td>—</td>
+<td>Biblioteca de ícones (Ionicons)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-backend">3.2 Backend</h3>
+<table>
+<thead>
+<tr>
+<th>Tecnologia</th>
+<th>Finalidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NestJS</strong></td>
+<td>Framework backend em Node.js</td>
+</tr>
+<tr>
+<td><strong>TypeORM</strong></td>
+<td>ORM para banco de dados</td>
+</tr>
+<tr>
+<td><strong>MySQL</strong></td>
+<td>Banco de dados relacional</td>
+</tr>
+<tr>
+<td><strong>JWT (jsonwebtoken)</strong></td>
+<td>Autenticação por tokens</td>
+</tr>
+<tr>
+<td><strong>bcrypt</strong></td>
+<td>Hash de senhas</td>
+</tr>
+<tr>
+<td><strong>Passport</strong></td>
+<td>Estratégia de autenticação</td>
+</tr>
+<tr>
+<td><strong>Docker</strong></td>
+<td>Containerização para deploy</td>
+</tr>
+<tr>
+<td><strong>Render</strong></td>
+<td>Hospedagem em nuvem</td>
+</tr>
+<tr>
+<td><strong>Google Gemini API</strong></td>
+<td>IA generativa para o tutor virtual</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-estrutura-de-diretorios-do-frontend">4. Estrutura de Diretórios do Frontend</h2>
+<pre><code>AppEnglish/
+├── app/                          # Rotas (Expo Router - file-based)
+│   ├── index.tsx                 # Entry point + auto-login
+│   ├── _layout.tsx               # Layout raiz
+│   ├── Categories.tsx            # Rota /Categories
+│   ├── Home.tsx                  # Rota /Home
+│   ├── Review.tsx                # Rota /Review
+│   ├── AiTutor.tsx               # Rota /AiTutor
+│   ├── Quests.tsx                # Rota /Quests
+│   ├── Ranking.tsx               # Rota /Ranking
+│   ├── Charade.tsx               # Rota /Charade
+│   ├── Force.tsx                 # Rota /Force
+│   ├── WordScramble.tsx          # Rota /WordScramble
+│   ├── perfil.tsx                # Rota /perfil
+│   └── register.tsx              # Rota /register
+│
+├── src/
+│   ├── screen/                   # Componentes de tela
+│   │   ├── login.tsx             # Tela de login
+│   │   ├── register.tsx          # Tela de cadastro
+│   │   ├── Categories.tsx        # Dashboard principal
+│   │   ├── Home.tsx              # Flash Cards
+│   │   ├── Review.tsx            # Revisão espaçada
+│   │   ├── AiTutor.tsx           # Chat com IA
+│   │   ├── Quests.tsx            # Desafios diários
+│   │   ├── Ranking.tsx           # Placar global
+│   │   ├── Charade.tsx           # Enigma Master
+│   │   ├── Force.tsx             # Jogo da Forca
+│   │   ├── WordScramble.tsx      # Embaralhar Palavras
+│   │   └── perfil.tsx            # Perfil do usuário
+│   │
+│   ├── components/               # Componentes reutilizáveis
+│   │   ├── cards.tsx             # WordCard (flash card)
+│   │   ├── progressBar.tsx       # Barra de progresso animada
+│   │   ├── AppLogo.tsx           # Logo/branding do app
+│   │   ├── ScreenWrapper.tsx     # Safe area wrapper
+│   │   ├── lista.ts              # Dicionário local de palavras
+│   │   ├── charadeList.ts        # Lista de charadas
+│   │   └── ForceList.ts          # Lista de palavras p/ forca
+│   │
+│   ├── service/                  # Serviços de comunicação
+│   │   ├── api.tsx               # Instância Axios + interceptor JWT
+│   │   └── aiService.tsx         # Serviço de chat IA (Gemini)
+│   │
+│   ├── context/                  # Gerenciamento de estado global
+│   │   └── ScoreContext.tsx      # Context de XP, perfil, palavras erradas
+│   │
+│   └── styles/                   # Sistema de design
+│       └── theme.ts              # Cores, sombras, tokens visuais
+│
+├── assets/images/                # Assets visuais
+│   ├── minerva-logo.png          # Logo oficial do app
+│   ├── icon.png                  # Ícone do app (= minerva-logo)
+│   ├── adaptive-icon.png         # Ícone adaptativo Android (= minerva-logo)
+│   └── splash-icon.png           # Imagem splash screen (= minerva-logo)
+│
+├── app.json                      # Configuração Expo
+├── eas.json                      # Configuração EAS Build
+├── tsconfig.json                 # Configuração TypeScript
+└── package.json                  # Dependências e scripts
+</code></pre>
+<hr />
+<h2 id="5-telas-e-funcionalidades-detalhadas">5. Telas e Funcionalidades Detalhadas</h2>
+<h3 id="51-tela-de-login-srcscreenlogintsx">5.1 Tela de Login (<code>src/screen/login.tsx</code>)</h3>
+<p><strong>Função:</strong> Autenticação do usuário existente.</p>
+<ul>
+<li>Campos: e-mail e senha</li>
+<li>Validação: campos obrigatórios, <code>.trim()</code> no e-mail</li>
+<li>Chamada API: <code>POST /auth/login</code> com <code>{ email, senha }</code></li>
+<li>Sucesso: salva <code>@Minerva:token</code>, <code>@Minerva:userId</code> e <code>@Minerva:user</code> no AsyncStorage</li>
+<li>Redirecionamento: <code>/Categories</code></li>
+<li>Componentes: <code>ScreenWrapper</code>, <code>AppLogo</code></li>
+<li>Fix aplicado: <code>KeyboardAvoidingView</code> com <code>behavior={Platform.OS === 'ios' ? 'padding' : undefined}</code> para eliminar trepidação da tela no Android</li>
+</ul>
+<hr />
+<h3 id="52-tela-de-cadastro-srcscreenregistertsx">5.2 Tela de Cadastro (<code>src/screen/register.tsx</code>)</h3>
+<p><strong>Função:</strong> Registro de novo usuário.</p>
+<ul>
+<li>Campos: nome, e-mail, senha, confirmação de senha</li>
+<li>Validações no frontend:</li>
+<li>Todos os campos obrigatórios</li>
+<li>Senha mínimo <strong>6 caracteres</strong></li>
+<li>Senhas devem ser iguais</li>
+<li><code>.trim()</code> no e-mail e nome</li>
+<li>Chamada API: <code>POST /auth/register</code> (fallback: <code>POST /auth/cadastro</code>)</li>
+<li>Sucesso: salva token e perfil, redireciona para <code>/Categories</code></li>
+</ul>
+<hr />
+<h3 id="53-dashboard-srcscreencategoriestsx">5.3 Dashboard (<code>src/screen/Categories.tsx</code>)</h3>
+<p><strong>Função:</strong> Hub principal de navegação com visão geral do progresso.</p>
+<ul>
+<li>Exibe: nome do usuário, XP total, nível atual, ofensiva diária (streak)</li>
+<li>Cards de navegação para todos os modos de jogo com ícones e cores distintas</li>
+<li>Botão de acesso ao perfil</li>
+</ul>
+<hr />
+<h3 id="54-flash-cards-srcscreenhometsx">5.4 Flash Cards (<code>src/screen/Home.tsx</code>)</h3>
+<p><strong>Função:</strong> Modo principal de estudo de vocabulário.</p>
+<ul>
+<li>Busca palavras da API: <code>GET /words</code></li>
+<li>Embaralha as palavras para aleatorização</li>
+<li>Renderiza componente <code>WordCard</code> com:</li>
+<li>Palavra em inglês exibida</li>
+<li>Pronúncia via Text-to-Speech (<code>expo-speech</code>)</li>
+<li>Campo para o usuário digitar a tradução em português</li>
+<li>Validação inteligente de resposta:<ul>
+<li>Aceita variações de gênero: <code>aluno(a)</code> → aceita "aluno" ou "aluna"</li>
+<li>Aceita sinônimos separados por <code>/</code>: <code>casa/lar</code> → aceita "casa" ou "lar"</li>
+</ul>
+</li>
+<li>Feedback visual: verde (acerto) / vermelho (erro)</li>
+<li>Registra resultado: <code>POST /status/registrar</code> com <code>{ id_usuario, id_word, tipo: 'acerto'|'erro' }</code></li>
+<li>Barra de progresso animada mostrando avanço na sessão</li>
+</ul>
+<hr />
+<h3 id="55-revisao-espacada-srcscreenreviewtsx">5.5 Revisão Espaçada (<code>src/screen/Review.tsx</code>)</h3>
+<p><strong>Função:</strong> Revisão de palavras erradas com sistema de repetição espaçada.</p>
+<ul>
+<li>Busca palavras para revisão: <code>GET /status/revisao/{userId}</code></li>
+<li>Combina com lista local de <code>wrongWords</code> do context</li>
+<li>Ao acertar na revisão: <code>DELETE /status/{idStatus}</code> para remover da lista</li>
+<li>Usa o mesmo componente <code>WordCard</code> do Flash Cards</li>
+<li>Se não houver palavras para revisar, redireciona ao início</li>
+</ul>
+<hr />
+<h3 id="56-embaralhar-palavras-srcscreenwordscrambletsx">5.6 Embaralhar Palavras (<code>src/screen/WordScramble.tsx</code>)</h3>
+<p><strong>Função:</strong> Jogo de desembaralhar letras.</p>
+<ul>
+<li>Carrega palavras do dicionário local (<code>lista.ts</code>)</li>
+<li>Embaralha letras da palavra em inglês</li>
+<li>Jogador toca nas letras para formar a palavra correta</li>
+<li>Exibe dica com a tradução em português</li>
+<li>Feedback visual: verde (correto) / vermelho (incorreto)</li>
+<li>Registra XP ao acertar: <code>POST /status/registrar</code></li>
+</ul>
+<hr />
+<h3 id="57-enigma-master-srcscreencharadetsx">5.7 Enigma Master (<code>src/screen/Charade.tsx</code>)</h3>
+<p><strong>Função:</strong> Jogo de charadas/enigmas em inglês.</p>
+<ul>
+<li>Carrega charadas do componente <code>charadesList</code></li>
+<li>Exibe pista textual em inglês</li>
+<li>Campo de texto para resposta</li>
+<li>Animação de shake ao errar</li>
+<li>Barra de progresso mostrando charadas resolvidas</li>
+<li>Registra XP ao acertar: <code>POST /status/registrar</code></li>
+</ul>
+<hr />
+<h3 id="58-jogo-da-forca-srcscreenforcetsx">5.8 Jogo da Forca (<code>src/screen/Force.tsx</code>)</h3>
+<p><strong>Função:</strong> Versão digital do jogo da forca.</p>
+<ul>
+<li>Carrega palavras e dicas do componente <code>ForceList</code></li>
+<li>Teclado alfabético na tela</li>
+<li>6 tentativas (representadas por corações)</li>
+<li>Letras corretas: destacadas em verde</li>
+<li>Letras erradas: destacadas em vermelho e desabilitadas</li>
+<li>Exibe dica (tradução em português)</li>
+<li>Registra XP ao vencer: <code>POST /status/registrar</code></li>
+</ul>
+<hr />
+<h3 id="59-tutor-ia-athena-srcscreenaitutortsx">5.9 Tutor IA — Athena (<code>src/screen/AiTutor.tsx</code>)</h3>
+<p><strong>Função:</strong> Chat com inteligência artificial para aprendizado de inglês.</p>
+<ul>
+<li>Interface de chat com bolhas de mensagem (estilo WhatsApp)</li>
+<li>Envia mensagens via: <code>POST /words/ai-tutor</code> (gateway no backend)</li>
+<li>Backend redireciona para a <strong>API Google Gemini</strong></li>
+<li>A IA assume a persona "Athena", tutora de inglês que responde em PT-BR</li>
+<li>Mantém histórico de conversação para respostas contextuais</li>
+<li>Botão de Text-to-Speech para ouvir respostas da IA</li>
+<li>Indicador de carregamento enquanto a IA processa</li>
+</ul>
+<hr />
+<h3 id="510-desafios-diarios-srcscreenqueststsx">5.10 Desafios Diários (<code>src/screen/Quests.tsx</code>)</h3>
+<p><strong>Função:</strong> Sistema de missões diárias com recompensas.</p>
+<ul>
+<li>Busca desafios: <code>GET /desafios/usuario/{userId}</code></li>
+<li>Exibe cada desafio com:</li>
+<li>Descrição da missão</li>
+<li>Barra de progresso</li>
+<li>Porcentagem de conclusão</li>
+<li>Recompensa em XP</li>
+<li>Ao completar: botão "Resgatar" chama <code>POST /desafios/resgatar/{id}</code></li>
+<li>Adiciona XP bônus ao perfil do usuário</li>
+</ul>
+<hr />
+<h3 id="511-ranking-global-srcscreenrankingtsx">5.11 Ranking Global (<code>src/screen/Ranking.tsx</code>)</h3>
+<p><strong>Função:</strong> Placar de liderança entre todos os usuários.</p>
+<ul>
+<li>Busca ranking: <code>GET /ranking</code></li>
+<li>Exibe lista ordenada por XP com:</li>
+<li>Medalhas 🥇🥈🥉 para os 3 primeiros</li>
+<li>Nome e pontuação de cada jogador</li>
+<li>Destaque visual para o usuário logado ("Você")</li>
+<li>Pull-to-refresh para atualizar</li>
+</ul>
+<hr />
+<h3 id="512-perfil-do-usuario-srcscreenperfiltsx">5.12 Perfil do Usuário (<code>src/screen/perfil.tsx</code>)</h3>
+<p><strong>Função:</strong> Visualização de estatísticas e logout.</p>
+<ul>
+<li>Busca estatísticas: <code>GET /status/estatisticas/{userId}</code></li>
+<li>Exibe:</li>
+<li>Avatar com inicial do nome</li>
+<li>Nome, e-mail, nível e XP</li>
+<li>Cards de estatísticas: palavras estudadas, taxa de acerto, ofensiva, palavras para revisar</li>
+<li>Botão de logout: limpa <code>AsyncStorage</code> e redireciona ao login</li>
+</ul>
+<hr />
+<h2 id="6-componentes-reutilizaveis">6. Componentes Reutilizáveis</h2>
+<h3 id="61-wordcard-srccomponentscardstsx">6.1 <code>WordCard</code> (<code>src/components/cards.tsx</code>)</h3>
+<p>Componente de cartão de vocabulário interativo.</p>
+<table>
+<thead>
+<tr>
+<th>Prop</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wordKey</code></td>
+<td><code>string</code></td>
+<td>Palavra em inglês</td>
+</tr>
+<tr>
+<td><code>result</code></td>
+<td><code>string</code></td>
+<td>Tradução correta em português</td>
+</tr>
+<tr>
+<td><code>example</code></td>
+<td><code>string</code></td>
+<td>Frase de exemplo</td>
+</tr>
+<tr>
+<td><code>onCorrect</code></td>
+<td><code>() =&gt; void</code></td>
+<td>Callback ao acertar</td>
+</tr>
+<tr>
+<td><code>onWrong</code></td>
+<td><code>() =&gt; void</code></td>
+<td>Callback ao errar</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lógica de validação inteligente:</strong>
+- Remove acentos e normaliza para comparação
+- Aceita variações de gênero: <code>professor(a)</code> → aceita "professor" e "professora"
+- Aceita sinônimos com <code>/</code>: <code>feliz/contente</code> → aceita ambos</p>
+<hr />
+<h3 id="62-progressbar-srccomponentsprogressbartsx">6.2 <code>ProgressBar</code> (<code>src/components/progressBar.tsx</code>)</h3>
+<p>Barra de progresso animada com porcentagem visual.</p>
+<table>
+<thead>
+<tr>
+<th>Prop</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>current</code></td>
+<td><code>number</code></td>
+<td>Progresso atual</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td><code>number</code></td>
+<td>Total de itens</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="63-applogo-srccomponentsapplogotsx">6.3 <code>AppLogo</code> (<code>src/components/AppLogo.tsx</code>)</h3>
+<p>Componente de marca/logo do aplicativo.</p>
+<table>
+<thead>
+<tr>
+<th>Prop</th>
+<th>Tipo</th>
+<th>Default</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>size</code></td>
+<td><code>'small' \| 'medium' \| 'large'</code></td>
+<td><code>'medium'</code></td>
+<td>Tamanho da logo</td>
+</tr>
+<tr>
+<td><code>showTagline</code></td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>Exibir slogan abaixo</td>
+</tr>
+<tr>
+<td><code>showText</code></td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>Exibir texto "MINERVA"</td>
+</tr>
+<tr>
+<td><code>imageSource</code></td>
+<td><code>ImageSourcePropType</code></td>
+<td><code>minerva-logo.png</code></td>
+<td>Imagem da logo</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="64-screenwrapper-srccomponentsscreenwrappertsx">6.4 <code>ScreenWrapper</code> (<code>src/components/ScreenWrapper.tsx</code>)</h3>
+<p>Container de safe area reutilizável.</p>
+<ul>
+<li>Aplica <code>paddingTop: StatusBar.currentHeight</code> no Android</li>
+<li>Aplica <code>SafeAreaView</code> nativo no iOS</li>
+<li>Garante que nenhum conteúdo fique atrás da barra de status</li>
+<li>Cor de fundo: <code>COLORS.background</code> (<code>#0D0B1E</code>)</li>
+</ul>
+<hr />
+<h2 id="7-servicos">7. Serviços</h2>
+<h3 id="71-api-client-srcserviceapitsx">7.1 API Client (<code>src/service/api.tsx</code>)</h3>
+<pre><code class="language-typescript">const api = axios.create({
+  baseURL: 'https://minerva-backend-e0sa.onrender.com/',
+});
+
+// Interceptor: injeta Bearer Token JWT automaticamente
+api.interceptors.request.use(async (config) =&gt; {
+  const token = await AsyncStorage.getItem('@Minerva:token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+</code></pre>
+<h3 id="72-ai-service-srcserviceaiservicetsx">7.2 AI Service (<code>src/service/aiService.tsx</code>)</h3>
+<pre><code class="language-typescript">export async function chatWithAiTutor(
+  message: string,
+  conversationHistory: ChatMessage[]
+): Promise&lt;string&gt;
+</code></pre>
+<ul>
+<li>Envia mensagem e histórico para <code>POST /words/ai-tutor</code></li>
+<li>Backend proxy redireciona para Google Gemini API</li>
+<li>Retorna resposta textual da IA</li>
+</ul>
+<hr />
+<h2 id="8-gerenciamento-de-estado-global">8. Gerenciamento de Estado Global</h2>
+<h3 id="scorecontext-srccontextscorecontexttsx"><code>ScoreContext</code> (<code>src/context/ScoreContext.tsx</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>globalScore</code></td>
+<td><code>number</code></td>
+<td>Pontuação total da sessão</td>
+</tr>
+<tr>
+<td><code>wrongWords</code></td>
+<td><code>array</code></td>
+<td>Lista de palavras erradas para revisão</td>
+</tr>
+<tr>
+<td><code>userProfile</code></td>
+<td><code>object</code></td>
+<td>Dados do usuário (nome, email, xp, nível, streak)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Função</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>addScore(points)</code></td>
+<td>Adiciona pontos à sessão atual</td>
+</tr>
+<tr>
+<td><code>addGlobalScore(points)</code></td>
+<td>Adiciona ao score global</td>
+</tr>
+<tr>
+<td><code>addWrongWord(word)</code></td>
+<td>Adiciona palavra à lista de revisão</td>
+</tr>
+<tr>
+<td><code>removeWrongWord(key)</code></td>
+<td>Remove palavra da lista de revisão</td>
+</tr>
+<tr>
+<td><code>setUserProfile(profile)</code></td>
+<td>Define perfil do usuário</td>
+</tr>
+<tr>
+<td><code>updateUserXp(xp)</code></td>
+<td>Atualiza XP localmente</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-endpoints-da-api-backend">9. Endpoints da API Backend</h2>
+<h3 id="91-modulo-de-autenticacao-auth">9.1 Módulo de Autenticação (<code>/auth</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Body</th>
+<th>Resposta</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><code>/auth/register</code></td>
+<td><code>{ nome, email, senha }</code></td>
+<td><code>{ token, user }</code></td>
+<td>Cadastro de novo usuário</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/auth/cadastro</code></td>
+<td><code>{ nome, email, senha }</code></td>
+<td><code>{ token, user }</code></td>
+<td>Cadastro (endpoint alternativo)</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/auth/login</code></td>
+<td><code>{ email, senha }</code></td>
+<td><code>{ token, user }</code></td>
+<td>Login com credenciais</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/auth/me</code></td>
+<td>—</td>
+<td><code>{ id_usuario, nome, email, xp, nivel }</code></td>
+<td>Perfil do usuário autenticado</td>
+</tr>
+</tbody>
+</table>
+<h3 id="92-modulo-de-palavras-words">9.2 Módulo de Palavras (<code>/words</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Body</th>
+<th>Resposta</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/words</code></td>
+<td>—</td>
+<td><code>[{ id_word, ingles, portugues, exemplo }]</code></td>
+<td>Lista de todas as palavras</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/words/ai-tutor</code></td>
+<td><code>{ message, conversationHistory }</code></td>
+<td><code>{ response }</code></td>
+<td>Gateway para chat IA (Gemini)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="93-modulo-de-statusprogresso-status">9.3 Módulo de Status/Progresso (<code>/status</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Body</th>
+<th>Resposta</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><code>/status/registrar</code></td>
+<td><code>{ id_usuario, id_word, tipo }</code></td>
+<td><code>{ success }</code></td>
+<td>Registra evento de estudo</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/status/revisao/{userId}</code></td>
+<td>—</td>
+<td><code>[{ idStatus, word, ... }]</code></td>
+<td>Palavras para revisão espaçada</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><code>/status/{idStatus}</code></td>
+<td>—</td>
+<td><code>{ success }</code></td>
+<td>Remove palavra da revisão</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/status/estatisticas/{userId}</code></td>
+<td>—</td>
+<td><code>{ total, acertos, streak, ... }</code></td>
+<td>Estatísticas do usuário</td>
+</tr>
+</tbody>
+</table>
+<h3 id="94-modulo-de-ranking-ranking">9.4 Módulo de Ranking (<code>/ranking</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Resposta</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/ranking</code></td>
+<td><code>[{ nome, xp, nivel }]</code></td>
+<td>Placar global ordenado por XP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="95-modulo-de-desafios-desafios">9.5 Módulo de Desafios (<code>/desafios</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Endpoint</th>
+<th>Resposta</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/desafios/usuario/{userId}</code></td>
+<td><code>[{ desafio, progresso, resgatado }]</code></td>
+<td>Desafios ativos do usuário</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/desafios/resgatar/{id}</code></td>
+<td><code>{ message, xpBonus }</code></td>
+<td>Resgata recompensa de XP</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-sistema-de-design-theme">10. Sistema de Design (Theme)</h2>
+<h3 id="101-paleta-de-cores">10.1 Paleta de Cores</h3>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Valor</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>background</code></td>
+<td><code>#0D0B1E</code></td>
+<td>Fundo principal (azul-escuro profundo)</td>
+</tr>
+<tr>
+<td><code>surface</code></td>
+<td><code>#1A1730</code></td>
+<td>Superfícies e cards</td>
+</tr>
+<tr>
+<td><code>cardBackground</code></td>
+<td><code>#1E1B33</code></td>
+<td>Fundo de cartões</td>
+</tr>
+<tr>
+<td><code>primary</code></td>
+<td><code>#7F56D9</code></td>
+<td>Cor primária (roxo)</td>
+</tr>
+<tr>
+<td><code>primaryGlow</code></td>
+<td><code>#A78BFA</code></td>
+<td>Brilho primário</td>
+</tr>
+<tr>
+<td><code>accent</code></td>
+<td><code>#00E5FF</code></td>
+<td>Cor de destaque (ciano neon)</td>
+</tr>
+<tr>
+<td><code>warning</code></td>
+<td><code>#FFD700</code></td>
+<td>Alertas e XP (dourado)</td>
+</tr>
+<tr>
+<td><code>danger</code></td>
+<td><code>#FF4757</code></td>
+<td>Erros e logout (vermelho)</td>
+</tr>
+<tr>
+<td><code>success</code></td>
+<td><code>#2ED573</code></td>
+<td>Acertos (verde)</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td><code>#FFFFFF</code></td>
+<td>Texto principal</td>
+</tr>
+<tr>
+<td><code>textSecondary</code></td>
+<td><code>#B8B5C8</code></td>
+<td>Texto secundário</td>
+</tr>
+<tr>
+<td><code>textMuted</code></td>
+<td><code>#6B6888</code></td>
+<td>Texto desativado</td>
+</tr>
+<tr>
+<td><code>border</code></td>
+<td><code>rgba(127, 86, 217, 0.2)</code></td>
+<td>Bordas sutis</td>
+</tr>
+</tbody>
+</table>
+<h3 id="102-sombras">10.2 Sombras</h3>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>glowPrimary</code></td>
+<td>Brilho roxo para elementos destacados</td>
+</tr>
+<tr>
+<td><code>glowAccent</code></td>
+<td>Brilho ciano para botões de ação</td>
+</tr>
+<tr>
+<td><code>card</code></td>
+<td>Sombra suave para cartões</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-fluxo-de-autenticacao">11. Fluxo de Autenticação</h2>
+<pre><code class="language-mermaid">sequenceDiagram
+    participant U as Usuário
+    participant App as App (Frontend)
+    participant AS as AsyncStorage
+    participant API as Backend API
+
+    Note over U,API: Primeiro Acesso
+    U-&gt;&gt;App: Abre o app
+    App-&gt;&gt;AS: Verifica @Minerva:token
+    AS--&gt;&gt;App: null (sem token)
+    App-&gt;&gt;U: Exibe tela de Login
+
+    U-&gt;&gt;App: Digita email + senha
+    App-&gt;&gt;API: POST /auth/login
+    API--&gt;&gt;App: { token, user }
+    App-&gt;&gt;AS: Salva token, userId, user
+    App-&gt;&gt;U: Redireciona para /Categories
+
+    Note over U,API: Acessos Seguintes (Auto-Login)
+    U-&gt;&gt;App: Abre o app
+    App-&gt;&gt;AS: Verifica @Minerva:token
+    AS--&gt;&gt;App: token encontrado!
+    App-&gt;&gt;U: Splash + Redirecionamento instantâneo → /Categories
+    App-&gt;&gt;API: GET /auth/me (background)
+    API--&gt;&gt;App: Perfil atualizado
+    App-&gt;&gt;AS: Atualiza cache do perfil
+
+    Note over U,API: Token Expirado
+    App-&gt;&gt;API: GET /auth/me
+    API--&gt;&gt;App: 401 Unauthorized
+    App-&gt;&gt;AS: Remove token, userId, user
+    App-&gt;&gt;U: Exibe tela de Login
+</code></pre>
+<hr />
+<h2 id="12-configuracao-e-deploy">12. Configuração e Deploy</h2>
+<h3 id="121-configuracao-do-app-appjson">12.1 Configuração do App (<code>app.json</code>)</h3>
+<pre><code class="language-json">{
+  &quot;expo&quot;: {
+    &quot;name&quot;: &quot;AppEnglish&quot;,
+    &quot;slug&quot;: &quot;AppEnglish&quot;,
+    &quot;version&quot;: &quot;1.0.0&quot;,
+    &quot;icon&quot;: &quot;./assets/images/minerva-logo.png&quot;,
+    &quot;android&quot;: {
+      &quot;adaptiveIcon&quot;: {
+        &quot;foregroundImage&quot;: &quot;./assets/images/minerva-logo.png&quot;,
+        &quot;backgroundColor&quot;: &quot;#0D0B1E&quot;
+      },
+      &quot;package&quot;: &quot;com.projetodpt.AppEnglish&quot;
+    },
+    &quot;plugins&quot;: [
+      &quot;expo-router&quot;,
+      [&quot;expo-splash-screen&quot;, {
+        &quot;image&quot;: &quot;./assets/images/minerva-logo.png&quot;,
+        &quot;imageWidth&quot;: 240,
+        &quot;backgroundColor&quot;: &quot;#0D0B1E&quot;
+      }]
+    ]
+  }
+}
+</code></pre>
+<h3 id="122-gerar-apk-android">12.2 Gerar APK Android</h3>
+<pre><code class="language-bash"># Instalar EAS CLI (se necessário)
+npm install -g eas-cli
+
+# Login no Expo
+eas login
+
+# Gerar APK
+npx eas build -p android --profile preview
+</code></pre>
+<h3 id="123-backend-docker-render">12.3 Backend — Docker &amp; Render</h3>
+<p>O backend é containerizado com Docker e hospedado no <strong>Render</strong>:</p>
+<ul>
+<li><strong>URL de Produção:</strong> <code>https://minerva-backend-e0sa.onrender.com</code></li>
+<li><strong>Banco de Dados:</strong> MySQL hospedado externamente</li>
+<li><strong>Variáveis de Ambiente:</strong> <code>DB_HOST</code>, <code>DB_PORT</code>, <code>DB_USER</code>, <code>DB_PASS</code>, <code>DB_NAME</code>, <code>JWT_SECRET</code>, <code>GEMINI_API_KEY</code></li>
+</ul>
+<hr />
+<h2 id="13-comandos-uteis-para-desenvolvimento">13. Comandos Úteis para Desenvolvimento</h2>
+<pre><code class="language-bash"># Instalar dependências
+npm install
+
+# Rodar em modo desenvolvimento
+npx expo start
+
+# Compilar TypeScript (verificação)
+npx tsc --noEmit
+
+# Rodar testes
+npm test -- --watchAll=false
+
+# Gerar APK
+npx eas build -p android --profile preview
+
+# Limpar cache do Expo
+npx expo start --clear
+</code></pre>
+<hr />
+<h2 id="14-dependencias-principais-packagejson">14. Dependências Principais (<code>package.json</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Pacote</th>
+<th>Versão</th>
+<th>Finalidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>expo</code></td>
+<td>~52.0.46</td>
+<td>Plataforma React Native</td>
+</tr>
+<tr>
+<td><code>react</code></td>
+<td>18.3.1</td>
+<td>Biblioteca UI</td>
+</tr>
+<tr>
+<td><code>react-native</code></td>
+<td>0.76.9</td>
+<td>Framework mobile</td>
+</tr>
+<tr>
+<td><code>expo-router</code></td>
+<td>~4.0.20</td>
+<td>Navegação por arquivos</td>
+</tr>
+<tr>
+<td><code>axios</code></td>
+<td>^1.9.0</td>
+<td>Requisições HTTP</td>
+</tr>
+<tr>
+<td><code>@react-native-async-storage/async-storage</code></td>
+<td>1.23.1</td>
+<td>Armazenamento local</td>
+</tr>
+<tr>
+<td><code>expo-speech</code></td>
+<td>~13.0.1</td>
+<td>Text-to-Speech</td>
+</tr>
+<tr>
+<td><code>@expo/vector-icons</code></td>
+<td>—</td>
+<td>Ícones (Ionicons)</td>
+</tr>
+<tr>
+<td><code>expo-splash-screen</code></td>
+<td>—</td>
+<td>Tela de carregamento</td>
+</tr>
+<tr>
+<td><code>expo-status-bar</code></td>
+<td>—</td>
+<td>Controle da barra de status</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p><strong>Minerva English App</strong> — Aprenda Inglês de Forma Gamificada 🦉✨</p>
+</blockquote>
+  </div>
+</body>
+</html>

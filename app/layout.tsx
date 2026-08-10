@@ -1,18 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const viewport: Viewport = {
   themeColor: "#050505",
@@ -20,6 +7,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: "Breno Piropo | Desenvolvedor de Software",
   description:
     "Desenvolvedor Full Stack especializado em React Native, NestJS, TypeScript e Python. Estudante de Ciência da Computação na UESC.",
@@ -31,6 +19,10 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -41,8 +33,11 @@ export default function RootLayout({
   return (
     <html lang="pt-br" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-[#050505] text-[#f5f5f5]`}
+        className="font-sans antialiased bg-[#050505] text-[#f5f5f5]"
       >
+        <a href="#conteudo-principal" className="skip-link">
+          Pular para o conteúdo
+        </a>
         {children}
       </body>
     </html>

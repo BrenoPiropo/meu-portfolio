@@ -25,7 +25,7 @@ export default function HeroSection() {
         <div className="animate-fade-up opacity-0 flex items-center gap-2 px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
           <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
           <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-blue-400">
-            Desenvolvedor Full Stack
+            Desenvolvedor Mobile & Backend
           </span>
         </div>
 
@@ -57,8 +57,8 @@ export default function HeroSection() {
 
         {/* Subtitle — Professional tone */}
         <p className="animate-fade-up delay-700 opacity-0 max-w-2xl text-base md:text-lg text-gray-400 font-light leading-[1.7] mb-12 mt-6">
-          <span className="text-white font-normal">Desenvolvimento de Software</span>.{' '}
-          Construo soluções mobile e web de alta performance com{' '}
+          <span className="text-white font-normal">Transformo produtos complexos em experiências rápidas, intuitivas e confiáveis</span>{' '}
+          com{' '}
           <span className="text-blue-400 font-medium">React Native</span>,{' '}
           <span className="text-blue-400 font-medium">NestJS</span>,{' '}
           <span className="text-blue-400 font-medium">TypeScript</span> e{' '}

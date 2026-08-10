@@ -27,6 +27,18 @@ export default function AboutSection() {
           <p className="text-lg text-gray-400 leading-relaxed mb-8">
             Sou estudante de <span className="text-blue-400 font-medium">Ciência da Computação</span> na UESC, focado em construir produtos digitais de alto impacto. Minha paixão é aliar <span className="text-blue-400 font-medium">experiência de usuário</span> impecável com engenharia de software robusta, transformando ideias complexas em interfaces intuitivas.
           </p>
+
+          <div className="mb-8 flex flex-wrap gap-2">
+            <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-300">
+              Aberto a oportunidades
+            </span>
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white/55">
+              Bahia · Brasil · UTC−3
+            </span>
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white/55">
+              Remoto ou híbrido
+            </span>
+          </div>
           
           <div className="relative pl-6 border-l border-white/10 space-y-6 mt-4">
             <div className="relative">
